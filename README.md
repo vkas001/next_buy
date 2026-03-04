@@ -1,50 +1,221 @@
-# Welcome to your Expo app 👋
+# Welcome to NextBuy 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+NextBuy - Secondary Marketplace Mobile App
 
-## Get started
+A cross-platform mobile applicaiton built with React Native and Expo that allows users to buy and sell second-hand products all in one place.
+The app supporsts authenticaiton, product listing, product pricing, discounts, vouchers, payment, refund, cart, wishlist, orders, pending, real time chat and real-time backend services using Appwrite.
 
-1. Install dependencies
+Project Overview 
+NextBuy help users:
 
-   ```bash
-   npm install
-   ```
+- Post products for sale 
+- Browse/search items
+- Add to card/wishlist
+- use discounts/vouchesrs
+- Online payment
+- Refund if the order is cancelled on time
+- Place orders
+- Manage profiles
+- Secure login/signup
 
-2. Start the app
+This project is developed collaboratively by a team.
+Follow the setup guide and rules carefully to avoid conflicts.
 
-   ```bash
-   npx expo start
-   ```
+Tech Stack
 
-In the output, you'll find options to open the app in a
+Frontend 
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- React Native
+- Expo
+- TypeScript 
+- NativeWind( Tailwind for React Native )
+- React Navigation
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Backend
 
-## Get a fresh project
+-AppWrite (Auth, Database, Storage)
 
-When you're ready, run:
+Version Control
 
-```bash
-npm run reset-project
-```
+-Git + GitHub
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Getting Started (First Time Setup)
 
-## Learn more
+1. Clone the Repository
 
-To learn more about developing your project with Expo, look at the following resources:
+# git clone
+# cd next_buy
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+2. Install dependencies
 
-## Join the community
+# npm install
 
-Join our community of developers creating universal apps.
+3. Start the project 
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# npx expo start
+
+4. Run on device
+
+- Press a -> Android
+- Press i -> iOS
+- Scan QR using Expo Go
+
+Entironment Variables
+
+Create a .env file in the root:
+- EXPO_PUBLIC_APPWRITE_ENDPOINT = YOUR_ENDPOINT
+- EXPO_PUBLIC_APPWRITE_PROJECT_ID= YOUR_PROJECT_ID
+
+Important:
+- Do NOT commit .env
+- Use .env.example for sharing structure only
+
+Folder Structure
+# follow the modular monolith folder structure if any confusion
+
+src/
+
+|-- features/
+|   |-- Auth/
+|   |   |-- components/  # Components specific to the Auth feature
+|   |   |-- screens/     # Screens related to authentication (LoginScreen, RegisterScreen)
+|   |   |-- hooks/       # Hooks specific to Auth
+|   |   |-- store/       # Local state management for Auth (e.g., Redux slice or Context)
+|   |   |-- types/       # TypeScript types/interfaces for Auth
+|   |   |-- utils/       # Utility functions specific to Auth
+|   |   |-- index.ts     # Public exports for the Auth module
+|   |-- Profile/
+|   |   |-- ... (similar structure as Auth)
+|   |-- Payments/
+|   |   |-- ...
+|-- components/ (or 'shared/components')
+
+|   |-- Button/        # Generic UI components used across the app
+|   |-- Avatar/
+|   |-- TextField/
+|-- services/ (or 'shared/services')
+
+|   |-- apiService.ts    # Centralized API configurations and general http client
+|   |-- analyticsService.ts
+|-- hooks/ (or 'shared/hooks')
+
+|   |-- useAppTheme.ts   # Reusable global hooks
+|-- utils/ (or 'shared/utils')
+
+|   |-- formatDate.ts    # General utility functions
+|-- navigation/
+
+|   |-- AppNavigator.tsx
+|   |-- AuthNavigator.tsx
+|   |-- types.ts         # Navigation types
+|-- store/ (or global state management folder)
+
+|   |-- rootReducer.ts
+|   |-- store.ts
+|-- assets/
+
+|   |-- images/
+|   |-- fonts/
+|-- App.tsx
+|-- index.ts/js
+
+Coding Guidelines 
+
+General 
+
+- Use TypeScript only 
+- Functional components only
+- Use NativeWind for styling
+- keep components small
+- Avoid  duplicate code
+
+Styling
+
+- Do NOT use inline styles
+- Prefer className (NativeWind)
+
+Clean Code
+- Remove console.log before commit 
+- write meaningful variable names
+
+Naming Convections
+
+Components -> ProductCard.tsx
+Screens -> HomeScreen.tsx
+Hooks -> useAuth.tsx
+Utils -> formatPrice.tsx
+Constants -> colors.ts
+
+Git Workflow (Team Rules)
+
+Branches
+
+- main -> production 
+- develop -> integration
+- feature -> new features
+
+Rules 
+ 
+- Never push directly to main
+- Always create feature branch
+- Create PR to develop
+- Review before merge
+
+Example 
+- featutre/login-screen
+- feature/cart-system
+
+Development Flow
+
+1. Pull latest develop 
+2. Create branch
+3. Code feature
+4. Test
+5. Commit
+6. Push
+7. Create PR
+
+App Architecture 
+
+UI (screens/components) 
+         |
+Services (API calls)
+         |
+Appwrite backend
+      |
+Database/Storage
+
+Common Problems & Fixes
+
+Metro cache issues
+# npx expo start -c
+
+Node modules issue
+# -rf node_modules
+# npm install
+
+Contribution Guide
+
+Before coding:
+- Read folder rules
+- Follow naming convetions
+
+ While coding: 
+ - keep commits small
+ - write clean code
+
+ Before PR:
+ - Test on device
+ - Remove logs
+ - Check errors
+
+ Team Responsibilities
+ - Patrik & Bidusha -> UI/UX
+ - Bikash -> UX/Backend
+
+ Liscense
+
+ This project is for academic purposes.
+
+ Maintainers
+ Project Team - NextBuy
