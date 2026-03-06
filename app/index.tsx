@@ -6,7 +6,7 @@ export default function App() {
   return (
     <SafeAreaView className="flex-1 bg-background dark:bg-darkBackground">
       <View className="flex-1 items-center justify-center bg-background dark:bg-darkBackground">
-        <Text className="text-xl font-bold text-textPrimary dark:text-darkTextPrimary">
+        <Text className="text-xl font-heading text-textPrimary dark:text-darkTextPrimary">
           Welcome to Next Buy!
         </Text>
       </View>

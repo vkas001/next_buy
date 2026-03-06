@@ -1,13 +1,18 @@
 import { ThemeProvider } from "@/theme";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useColorScheme } from "react-native";
 import './global.css';
+import { useLoadFonts } from "@/fonts/useLoadFonts";
 
-
- 
 
 export default function RootLayout() {
+
+const fontsLoaded = useLoadFonts();
+
+if (!fontsLoaded) {
+  return null; // or a loading spinner
+}
+
   return (
     <ThemeProvider>
       <StatusBar style="auto"/>
