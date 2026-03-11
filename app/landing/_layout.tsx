@@ -1,8 +1,8 @@
+import { useLoadFonts } from "@/fonts/useLoadFonts";
 import { ThemeProvider } from "@/theme";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import './global.css';
-import { useLoadFonts } from "@/fonts/useLoadFonts";
+import "../global.css";
 
 
 export default function RootLayout() {
