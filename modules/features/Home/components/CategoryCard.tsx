@@ -13,14 +13,37 @@ export default function CategoryCard({
   onPress,
 }: CategoryCardProps) {
   return (
-    <TouchableOpacity onPress={onPress} className="items-center mr-4">
+    <TouchableOpacity
+      onPress={onPress}
+      style={{ width: 70, alignItems: "center", marginRight: 1 }}
+    >
       {/* Icon Box */}
-      <View className="w-14 h-14 bg-card dark:bg-darkCard border border-border dark:border-darkBorder rounded-2xl items-center justify-center mb-2">
-        <Ionicons name={icon as any} size={24} color="#2563EB" />
+      <View
+        style={{
+          width: 56,
+          height: 56,
+          backgroundColor: "#1E293B",
+          borderWidth: 1,
+          borderColor: "#334155",
+          borderRadius: 29,
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: 8,
+        }}
+      >
+        <Ionicons name={icon as any} size={24} color="#1CD9B9" />
       </View>
 
       {/* Label */}
-      <Text className="text-xs font-body text-textSecondary dark:text-darkTextSecondary">
+      <Text
+        numberOfLines={1}
+        style={{
+          fontSize: 11,
+          color: "white",
+          textAlign: "center",
+          fontFamily: "Inter_400Regular",
+        }}
+      >
         {name}
       </Text>
     </TouchableOpacity>

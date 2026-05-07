@@ -21,43 +21,98 @@ export default function FeaturedCard({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="mr-4 bg-card dark:bg-darkCard border border-border dark:border-darkBorder rounded-2xl overflow-hidden"
-      style={{ width: 160 }}
+      style={{
+        width: 160,
+        marginRight: 16,
+        backgroundColor: "#1E293B",
+        borderWidth: 1,
+        borderColor: "#334155",
+        borderRadius: 16,
+        overflow: "hidden",
+      }}
     >
-      {/* Product Image Placeholder */}
-      <View className="w-full h-32 bg-darkBorder items-center justify-center">
+      {/* Image Placeholder */}
+      <View
+        style={{
+          width: "100%",
+          height: 128,
+          backgroundColor: "#334155",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Ionicons name="image-outline" size={40} color="#64748B" />
       </View>
 
-      {/* Product Info */}
-      <View className="p-3">
+      {/* Info */}
+      <View style={{ padding: 12 }}>
         {/* Discount Badge */}
-        <View className="self-start bg-secondary rounded-full px-2 py-0.5 mb-2">
-          <Text className="text-white text-xs font-bodyMedium">
+        <View
+          style={{
+            alignSelf: "flex-start",
+            backgroundColor: "#10B981",
+            borderRadius: 999,
+            paddingHorizontal: 8,
+            paddingVertical: 2,
+            marginBottom: 8,
+          }}
+        >
+          <Text
+            style={{
+              color: "white",
+              fontSize: 11,
+              fontFamily: "Inter_500Medium",
+            }}
+          >
             -{discount}
           </Text>
         </View>
 
-        {/* Product Name */}
+        {/* Name */}
         <Text
           numberOfLines={1}
-          className="text-sm font-bodyMedium text-textPrimary dark:text-darkTextPrimary mb-1"
+          style={{
+            fontSize: 14,
+            fontFamily: "Inter_500Medium",
+            color: "#F8FAFC",
+            marginBottom: 4,
+          }}
         >
           {name}
         </Text>
 
         {/* Condition */}
-        <Text className="text-xs font-body text-textSecondary dark:text-darkTextSecondary mb-1">
+        <Text
+          style={{
+            fontSize: 11,
+            color: "#64748B",
+            fontFamily: "Inter_400Regular",
+            marginBottom: 4,
+          }}
+        >
           {condition}
         </Text>
 
         {/* Price */}
-        <Text className="text-base font-heading text-primary dark:text-darkPrimary">
+        <Text
+          style={{
+            fontSize: 16,
+            fontFamily: "Poppins_600SemiBold",
+            color: "#2563EB",
+          }}
+        >
           {price}
         </Text>
 
         {/* Original Price */}
-        <Text className="text-xs font-body text-textSecondary dark:text-darkTextSecondary line-through">
+        <Text
+          style={{
+            fontSize: 11,
+            color: "#64748B",
+            fontFamily: "Inter_400Regular",
+            textDecorationLine: "line-through",
+          }}
+        >
           {originalPrice}
         </Text>
       </View>

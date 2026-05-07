@@ -19,39 +19,75 @@ export default function ProductCard({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="bg-card dark:bg-darkCard border border-border dark:border-darkBorder rounded-2xl overflow-hidden mb-4"
-      style={{ width: "48%" }}
+      style={{
+        width: "48%",
+        backgroundColor: "#1E293B",
+        borderWidth: 1,
+        borderColor: "#334155",
+        borderRadius: 16,
+        overflow: "hidden",
+        marginBottom: 16,
+      }}
     >
-      {/* Product Image Placeholder */}
-      <View className="w-full h-28 bg-darkBorder items-center justify-center">
+      {/* Image Placeholder */}
+      <View
+        style={{
+          width: "100%",
+          height: 112,
+          backgroundColor: "#334155",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Ionicons name="image-outline" size={32} color="#64748B" />
       </View>
 
-      {/* Product Info */}
-      <View className="p-3">
-        {/* Product Name */}
+      {/* Info */}
+      <View style={{ padding: 12 }}>
+        {/* Name */}
         <Text
           numberOfLines={1}
-          className="text-sm font-bodyMedium text-textPrimary dark:text-darkTextPrimary mb-1"
+          style={{
+            fontSize: 14,
+            fontFamily: "Inter_500Medium",
+            color: "#F8FAFC",
+            marginBottom: 4,
+          }}
         >
           {name}
         </Text>
 
-        {/* Price and Wishlist */}
-        <View className="flex-row items-center justify-between">
-          {/* Price */}
-          <Text className="text-base font-heading text-primary dark:text-darkPrimary">
+        {/* Price + Wishlist */}
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: "Poppins_600SemiBold",
+              color: "#2563EB",
+            }}
+          >
             {price}
           </Text>
-
-          {/* Wishlist Button */}
           <TouchableOpacity onPress={onWishlist}>
             <Ionicons name="heart-outline" size={18} color="#64748B" />
           </TouchableOpacity>
         </View>
 
         {/* Condition */}
-        <Text className="text-xs font-body text-textSecondary dark:text-darkTextSecondary mt-1">
+        <Text
+          style={{
+            fontSize: 11,
+            color: "#64748B",
+            fontFamily: "Inter_400Regular",
+            marginTop: 4,
+          }}
+        >
           {condition}
         </Text>
       </View>
