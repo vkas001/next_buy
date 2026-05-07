@@ -1,15 +1,23 @@
 import { Ionicons } from "@expo/vector-icons";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  RefreshControl,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import LoadingScreen from "@/modules/shared/components/LoadingScreen";
+import SectionHeader from "@/modules/shared/components/SectionHeader";
 import Banner from "../components/Banner";
 import CategoryCard from "../components/CategoryCard";
 import FeaturedCard from "../components/FeaturedCard";
+import HomeHeader from "../components/HomeHeader";
 import ProductCard from "../components/ProductCard";
-import SearchBar from "../components/SearchBar";
+import { useHomeScreen } from "../hooks/useHomeScreen";
+import { useScreenRefresh } from "../hooks/useScreenRefresh";
 
-// Dummy Data - will be replaced by backend API later
-
+// Dummy data - will be replaced by backend API later
 const categories = [
   { id: "1", name: "Electronics", icon: "phone-portrait-outline" },
   { id: "2", name: "Fashion", icon: "shirt-outline" },
@@ -69,51 +77,44 @@ const recentProducts = [
 ];
 
 export default function HomeScreen() {
+  const { isLoading, refetchAll } = useHomeScreen();
+  const { refreshing, onRefresh } = useScreenRefresh(async () => {
+    await refetchAll();
+  });
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#0F172A" }}
-      className="flex-1 bg-background dark:bg-darkBackground"
       edges={["top"]}
     >
+      {/* Header */}
+      <HomeHeader />
+
+      {/* Divider */}
+      <View
+        style={{
+          marginHorizontal: 24,
+          borderBottomWidth: 1,
+          borderBottomColor: "#1E293B",
+          marginBottom: 8,
+        }}
+      />
+
+      {/* Scrollable Content */}
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 80 }}
+        contentContainerStyle={{ paddingBottom: 100 }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor="#2563EB"
+            colors={["#2563EB"]}
+          />
+        }
       >
-        {/* Header */}
-        <View className="flex-row items-center justify-between px-6 pt-4 pb-4">
-          <View>
-            <Text className="text-sm font-body text-textSecondary dark:text-darkTextSecondary">
-              NAMASTE 👋
-            </Text>
-            <Text className="text-xl font-heading text-textPrimary dark:text-darkTextPrimary">
-              Find Great Deals
-            </Text>
-          </View>
-
-          <View className="flex-row items-center gap-3">
-            {/* Notifications */}
-            <TouchableOpacity className="w-10 h-10 bg-card dark:bg-darkCard rounded-full items-center justify-center border border-border dark:border-darkBorder">
-              <Ionicons
-                name="notifications-outline"
-                size={20}
-                color="#64748B"
-              />
-            </TouchableOpacity>
-
-            {/* Avatar */}
-            <TouchableOpacity className="w-10 h-10 bg-primary rounded-full items-center justify-center">
-              <Text className="text-white font-bodyMedium text-sm">JD</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Search Bar */}
-        <View className="px-6 mb-6">
-          <SearchBar placeholder="Search products..." />
-        </View>
-
         {/* Promo Banner */}
-        <View className="px-6 mb-6">
+        <View style={{ paddingHorizontal: 24, marginBottom: 24 }}>
           <Banner
             tag="LIMITED TIME OFFER"
             title="Up to 50% Off"
@@ -122,18 +123,10 @@ export default function HomeScreen() {
         </View>
 
         {/* Categories */}
-        <View className="mb-6">
-          <View className="flex-row items-center justify-between px-6 mb-3">
-            <Text className="text-base font-heading text-textPrimary dark:text-darkTextPrimary">
-              Categories
-            </Text>
-            <TouchableOpacity>
-              <Text className="text-sm font-body text-primary dark:text-darkPrimary">
-                See all
-              </Text>
-            </TouchableOpacity>
+        <View style={{ marginBottom: 24 }}>
+          <View style={{ paddingHorizontal: 24 }}>
+            <SectionHeader title="Categories" />
           </View>
-
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -146,22 +139,14 @@ export default function HomeScreen() {
         </View>
 
         {/* Featured Deals */}
-        <View className="mb-6">
-          <View className="flex-row items-center justify-between px-6 mb-3">
-            <Text className="text-base font-heading text-textPrimary dark:text-darkTextPrimary">
-              Featured Deals
-            </Text>
-            <TouchableOpacity>
-              <Text className="text-sm font-body text-primary dark:text-darkPrimary">
-                See all
-              </Text>
-            </TouchableOpacity>
+        <View style={{ marginBottom: 24 }}>
+          <View style={{ paddingHorizontal: 24 }}>
+            <SectionHeader title="Featured Deals" />
           </View>
-
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: 24 }}
+            contentContainerStyle={{ paddingHorizontal: 20 }}
           >
             {featuredProducts.map((product) => (
               <FeaturedCard
@@ -177,19 +162,15 @@ export default function HomeScreen() {
         </View>
 
         {/* Recent Listings */}
-        <View className="px-6 mb-6">
-          <View className="flex-row items-center justify-between mb-3">
-            <Text className="text-base font-heading text-textPrimary dark:text-darkTextPrimary">
-              Recent Listings
-            </Text>
-            <TouchableOpacity>
-              <Text className="text-sm font-body text-primary dark:text-darkPrimary">
-                See all
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          <View className="flex-row flex-wrap justify-between">
+        <View style={{ paddingHorizontal: 24, marginBottom: 24 }}>
+          <SectionHeader title="Recent Listings" />
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
             {recentProducts.map((product) => (
               <ProductCard
                 key={product.id}
@@ -203,9 +184,24 @@ export default function HomeScreen() {
       </ScrollView>
 
       {/* Floating Sell Button */}
-      <TouchableOpacity className="absolute bottom-6 right-6 bg-secondary rounded-full w-14 h-14 items-center justify-center shadow-lg">
+      <TouchableOpacity
+        style={{
+          position: "absolute",
+          bottom: 80,
+          right: 24,
+          width: 56,
+          height: 56,
+          backgroundColor: "#10B981",
+          borderRadius: 28,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Ionicons name="add" size={28} color="white" />
       </TouchableOpacity>
+
+      {/* Loading Overlay */}
+      {isLoading && !refreshing && <LoadingScreen />}
     </SafeAreaView>
   );
 }

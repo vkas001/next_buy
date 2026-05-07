@@ -14,33 +14,86 @@ export default function Banner({
   onPress,
 }: BannerProps) {
   return (
-    <View className="bg-primary rounded-3xl p-5 flex-row items-center justify-between">
+    <View
+      style={{
+        backgroundColor: "#2563EB",
+        borderRadius: 24,
+        padding: 20,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
+    >
       {/* Left Content */}
-      <View className="flex-1">
+      <View style={{ flex: 1 }}>
         {/* Tag */}
-        <Text className="text-xs font-bodyMedium text-white opacity-80 mb-1">
+        <Text
+          style={{
+            fontSize: 11,
+            color: "rgba(255,255,255,0.8)",
+            marginBottom: 4,
+            fontFamily: "Inter_500Medium",
+          }}
+        >
           {tag}
         </Text>
 
         {/* Title */}
-        <Text className="text-2xl font-heading text-white mb-1">{title}</Text>
+        <Text
+          style={{
+            fontSize: 22,
+            color: "white",
+            marginBottom: 4,
+            fontFamily: "Poppins_600SemiBold",
+          }}
+        >
+          {title}
+        </Text>
 
         {/* Subtitle */}
-        <Text className="text-xs font-body text-white opacity-70 mb-3">
+        <Text
+          style={{
+            fontSize: 11,
+            color: "rgba(255,255,255,0.7)",
+            marginBottom: 12,
+            fontFamily: "Inter_400Regular",
+          }}
+        >
           {subtitle}
         </Text>
 
-        {/* Button */}
+        {/* Shop Now Button */}
         <TouchableOpacity
           onPress={onPress}
-          className="self-start bg-white rounded-xl px-4 py-2"
+          style={{
+            alignSelf: "flex-start",
+            backgroundColor: "white",
+            borderRadius: 12,
+            paddingHorizontal: 16,
+            paddingVertical: 8,
+          }}
         >
-          <Text className="text-primary text-xs font-bodyMedium">Shop Now</Text>
+          <Text
+            style={{
+              color: "#2563EB",
+              fontSize: 12,
+              fontFamily: "Inter_500Medium",
+            }}
+          >
+            Shop Now
+          </Text>
         </TouchableOpacity>
       </View>
 
       {/* Decorative Circle */}
-      <View className="w-20 h-20 bg-white opacity-20 rounded-full" />
+      <View
+        style={{
+          width: 80,
+          height: 80,
+          backgroundColor: "rgba(255,255,255,0.2)",
+          borderRadius: 40,
+        }}
+      />
     </View>
   );
 }
