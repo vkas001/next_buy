@@ -14,7 +14,7 @@ const TAB_ICONS: Record<
 };
 
 export default function TabsLayout() {
-  const cartItemCount = 3; // 🔴 Replace with real cart count from your store/context
+  const cartItemCount = 90; //  Replace with real cart count from your store/context
 
   return (
     <Tabs
