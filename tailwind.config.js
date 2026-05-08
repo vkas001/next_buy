@@ -5,7 +5,7 @@ const { light, dark } = require("./theme/colors");
 module.exports = {
   content: [
     "./app/**/*.{js,jsx,ts,tsx}",
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./modules/**/*.{js,jsx,ts,tsx}",
     "./components/**/*.{js,jsx,ts,tsx}",
     "./fonts/**/*.{js,jsx,ts,tsx}",
     "./theme/**/*.{js,jsx,ts,tsx}",

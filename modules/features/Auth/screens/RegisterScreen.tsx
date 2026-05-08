@@ -28,7 +28,7 @@ export default function RegisterScreen() {
           style={{
             flex: 1,
             paddingHorizontal: 24,
-            paddingTop: 30,
+            paddingTop: 80,
             paddingBottom: 40,
           }}
         >
@@ -43,18 +43,6 @@ export default function RegisterScreen() {
             }}
           >
             Create account
-          </Text>
-          {/* Brand */}
-          <Text
-            style={{
-              fontSize: 35,
-              fontFamily: "Inter_500Medium",
-              color: "#10B981",
-              marginTop: -30,
-              textAlign: "center",
-            }}
-          >
-            🛍️ NEXTBUY
           </Text>
 
           {/* Full Name */}
