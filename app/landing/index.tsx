@@ -1,54 +1,78 @@
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
+import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import "../global.css";
+
+const { height } = Dimensions.get("window");
 
 export default function LandingPage() {
   return (
     <SafeAreaView
-      className="flex-1 bg-background dark:bg-darkBackground"
+      style={{ flex: 1, backgroundColor: "#0F172A" }}
+      className="flex-1"
     >
-      <View>
+      {/* Full screen image */}
+      <View style={{ position: "absolute", width: "100%", height: "100%" }}>
         <Image
-          source={require("../../assets/images/bg1.png")}
-          className="w-screen h-[600px]"
+          source={require("../../assets/images/landing.jpg")}
+          style={{ width: "100%", height: "100%" }}
           resizeMode="cover"
+        />
+        {/* Dark gradient overlay on image */}
+        <LinearGradient
+          colors={["transparent", "rgba(15,23,42,0.7)", "#0F172A"]}
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "60%",
+          }}
         />
       </View>
 
-      {/* Bottom Card */}
-      <View className="flex-1 bg-card dark:bg-darkCard rounded-t-3xl py-4 items-center -mt-8 z-10">
+      {/* Top logo */}
 
-        {/*Title */}
-        <Text className="text-xl font-heading text-textPrimary dark:text-darkTextPrimary">
-          Welcome to Next Buy
+      {/* Bottom content */}
+      <View className="flex-1 justify-end px-6 pb-10">
+        {/* Tag */}
+        <View className="self-center bg-secondary rounded-full px-3 py-1 mb-2">
+          <Text className="text-xs font-bodyMedium text-white">
+            Your Favourite Secondary Marketplace
+          </Text>
+        </View>
+
+        {/* Title */}
+        <Text className="text-6xl font-heading text-white mb-3 text-center leading-tight">
+          Buy & Sell{"\n"}With Confidence
         </Text>
 
         {/* Description */}
-        <Text className="text-sm font-body text-textSecondary dark:text-darkTextSecondary mt-2 text-center px-6">
-          Discover the best deals and products at your fingertips.
+        <Text className="text-sm font-body text-white opacity-70 mb-8 leading-6">
+          Discover amazing second-hand deals or list your items in minutes.
+          Safe, simple and trusted.
         </Text>
 
-        {/* Done Button */}
-        <TouchableOpacity className="self-stretch mx-4 bg-secondary rounded-full py-4 mt-6 items-center">
-          <Text className="text-base font-bodyMedium text-textPrimary dark:text-darkTextPrimary">
-            Get Started
+        {/* Get Started Button */}
+        <TouchableOpacity
+          onPress={() => router.push("/(tabs)")}
+          className="w-full bg-primary rounded-2xl py-5 items-center mb-4"
+        >
+          <Text className="text-lg font-bold font-bodyMedium text-white">
+            Let's Explore
           </Text>
         </TouchableOpacity>
+        <Text className="self-center text-white text-xl">or</Text>
 
-        {/* Skip Button */}
-        <TouchableOpacity className="self-stretch mx-4 bg-transparent rounded-full py-4 items-center mt-4 border border-border dark:border-darkBorder">
-          <Text className="text-sm font-body text-textSecondary dark:text-darkTextSecondary">
-            Skip
+        {/* Already have account */}
+        <TouchableOpacity
+          onPress={() => router.push("/auth/login")}
+          className="w-full items-center py-3"
+        >
+          <Text className="text-lg font-bold text-white text-">
+            LogIn with account.
           </Text>
         </TouchableOpacity>
-
-        {/* Pagination Dots */}
-        <View className="flex-row items-center justify-center mt-4">
-          <View className="w-3 h-3 bg-primary rounded-full mx-1" />
-          <View className="w-3 h-3 bg-border rounded-full mx-1" />
-          <View className="w-3 h-3 bg-border rounded-full mx-1" />
-          <View className="w-3 h-3 bg-border rounded-full mx-1" />
-        </View>
       </View>
     </SafeAreaView>
   );

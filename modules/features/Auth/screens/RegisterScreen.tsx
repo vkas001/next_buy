@@ -1,0 +1,305 @@
+import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
+import { useState } from "react";
+import {
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+export default function RegisterScreen() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  return (
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "#0F172A" }}
+      edges={["top"]}
+    >
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
+        <View
+          style={{
+            flex: 1,
+            paddingHorizontal: 24,
+            paddingTop: 30,
+            paddingBottom: 40,
+          }}
+        >
+          {/* Title */}
+          <Text
+            style={{
+              fontSize: 47,
+              fontFamily: "Poppins_600SemiBold",
+              color: "#F8FAFC",
+
+              textAlign: "center",
+            }}
+          >
+            Create account
+          </Text>
+          {/* Brand */}
+          <Text
+            style={{
+              fontSize: 35,
+              fontFamily: "Inter_500Medium",
+              color: "#10B981",
+              marginTop: -30,
+              textAlign: "center",
+            }}
+          >
+            🛍️ NEXTBUY
+          </Text>
+
+          {/* Full Name */}
+          <Text
+            style={{
+              fontSize: 13,
+              fontFamily: "Inter_500Medium",
+              color: "white",
+              marginBottom: 8,
+            }}
+          >
+            Full Name
+          </Text>
+          <View
+            style={{
+              backgroundColor: "#1E293B",
+              borderWidth: 1,
+              borderColor: "#334155",
+              borderRadius: 16,
+              paddingHorizontal: 16,
+
+              marginBottom: 16,
+            }}
+          >
+            <TextInput
+              style={{
+                fontSize: 14,
+                fontFamily: "Inter_400Regular",
+                color: "#F8FAFC",
+              }}
+              placeholder="Your Name"
+              placeholderTextColor="#64748B"
+              autoCapitalize="words"
+            />
+          </View>
+
+          {/* Email */}
+          <Text
+            style={{
+              fontSize: 13,
+              fontFamily: "Inter_500Medium",
+              color: "white",
+              marginBottom: 8,
+            }}
+          >
+            Email address
+          </Text>
+          <View
+            style={{
+              backgroundColor: "#1E293B",
+              borderWidth: 1,
+              borderColor: "#334155",
+              borderRadius: 16,
+              paddingHorizontal: 16,
+
+              marginBottom: 16,
+            }}
+          >
+            <TextInput
+              style={{
+                fontSize: 14,
+                fontFamily: "Inter_400Regular",
+                color: "#F8FAFC",
+              }}
+              placeholder="you@example.com"
+              placeholderTextColor="#64748B"
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          </View>
+
+          {/* Password */}
+          <Text
+            style={{
+              fontSize: 13,
+              fontFamily: "Inter_500Medium",
+              color: "white",
+              marginBottom: 8,
+            }}
+          >
+            Password
+          </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              backgroundColor: "#1E293B",
+              borderWidth: 1,
+              borderColor: "#334155",
+              borderRadius: 16,
+              paddingHorizontal: 16,
+              marginBottom: 16,
+            }}
+          >
+            <TextInput
+              style={{
+                flex: 1,
+                fontSize: 14,
+                fontFamily: "Inter_400Regular",
+                color: "#F8FAFC",
+                paddingVertical: 14,
+              }}
+              placeholder="Create a password"
+              placeholderTextColor="#64748B"
+              secureTextEntry={!showPassword}
+            />
+            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+              <Ionicons
+                name={showPassword ? "eye-off-outline" : "eye-outline"}
+                size={20}
+                color="#64748B"
+              />
+            </TouchableOpacity>
+          </View>
+
+          {/* Confirm Password */}
+          <Text
+            style={{
+              fontSize: 13,
+              fontFamily: "Inter_500Medium",
+              color: "white",
+              marginBottom: 8,
+            }}
+          >
+            Confirm Password
+          </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              backgroundColor: "#1E293B",
+              borderWidth: 1,
+              borderColor: "#334155",
+              borderRadius: 16,
+              paddingHorizontal: 16,
+              marginBottom: 32,
+            }}
+          >
+            <TextInput
+              style={{
+                flex: 1,
+                fontSize: 14,
+                fontFamily: "Inter_400Regular",
+                color: "#F8FAFC",
+                paddingVertical: 16,
+              }}
+              placeholder="Repeat your password"
+              placeholderTextColor="#64748B"
+              secureTextEntry={!showConfirmPassword}
+            />
+            <TouchableOpacity
+              onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              <Ionicons
+                name={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
+                size={20}
+                color="#64748B"
+              />
+            </TouchableOpacity>
+          </View>
+
+          {/* Create Account Button */}
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#2563EB",
+              borderRadius: 16,
+              paddingVertical: 16,
+              alignItems: "center",
+              marginBottom: 16,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                fontFamily: "Inter_500Medium",
+                color: "white",
+              }}
+            >
+              Create account
+            </Text>
+          </TouchableOpacity>
+
+          {/* Divider */}
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginBottom: 16,
+            }}
+          >
+            <View style={{ flex: 1, height: 1, backgroundColor: "#334155" }} />
+            <Text
+              style={{
+                fontSize: 12,
+                fontFamily: "Inter_400Regular",
+                color: "#64748B",
+                marginHorizontal: 12,
+              }}
+            >
+              or
+            </Text>
+            <View style={{ flex: 1, height: 1, backgroundColor: "#334155" }} />
+          </View>
+
+          {/* Sign in link */}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              marginBottom: 32,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 13,
+                fontFamily: "Inter_400Regular",
+                color: "#64748B",
+              }}
+            >
+              Already have an account?{" "}
+            </Text>
+            <TouchableOpacity onPress={() => router.push("/auth/login")}>
+              <Text
+                style={{
+                  fontSize: 13,
+                  fontFamily: "Inter_500Medium",
+                  color: "#2563EB",
+                }}
+              >
+                Sign in
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Back Button */}
+          <TouchableOpacity
+            onPress={() => router.back()}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          ></TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}

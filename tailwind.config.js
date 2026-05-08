@@ -3,8 +3,13 @@
 const { light, dark } = require("./theme/colors");
 
 module.exports = {
-
-  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./app/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./components/**/*.{js,jsx,ts,tsx}",
+    "./fonts/**/*.{js,jsx,ts,tsx}",
+    "./theme/**/*.{js,jsx,ts,tsx}",
+  ],
   presets: [require("nativewind/preset")],
   darkMode: "media",
   theme: {
@@ -49,9 +54,9 @@ module.exports = {
         "6xl": "42px",
         "7xl": "48px",
         "8xl": "56px",
-        "9xl": "64px"
+        "9xl": "64px",
       },
     },
   },
   plugins: [],
-}
+};
