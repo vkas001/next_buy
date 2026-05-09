@@ -12,14 +12,14 @@ export default function SectionHeader({ title, onSeeAll }: SectionHeaderProps) {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        marginBottom: 6,
+        marginBottom: 12,
       }}
     >
       <Text
         style={{
-          fontSize: 23,
+          fontSize: 16,
           fontFamily: "Poppins_600SemiBold",
-          color: "#F8FAFC",
+          color: "#1C1917",
         }}
       >
         {title}
@@ -29,7 +29,7 @@ export default function SectionHeader({ title, onSeeAll }: SectionHeaderProps) {
           style={{
             fontSize: 13,
             fontFamily: "Inter_400Regular",
-            color: "#2563EB",
+            color: "#F97316",
           }}
         >
           See all

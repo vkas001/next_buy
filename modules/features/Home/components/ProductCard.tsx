@@ -21,9 +21,9 @@ export default function ProductCard({
       onPress={onPress}
       style={{
         width: "48%",
-        backgroundColor: "#1E293B",
+        backgroundColor: "#FFFFFF",
         borderWidth: 1,
-        borderColor: "#334155",
+        borderColor: "#FED7AA",
         borderRadius: 16,
         overflow: "hidden",
         marginBottom: 16,
@@ -34,12 +34,12 @@ export default function ProductCard({
         style={{
           width: "100%",
           height: 112,
-          backgroundColor: "#334155",
+          backgroundColor: "#FFF7ED",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <Ionicons name="image-outline" size={32} color="#64748B" />
+        <Ionicons name="image-outline" size={32} color="#FED7AA" />
       </View>
 
       {/* Info */}
@@ -50,7 +50,7 @@ export default function ProductCard({
           style={{
             fontSize: 14,
             fontFamily: "Inter_500Medium",
-            color: "#F8FAFC",
+            color: "#1C1917",
             marginBottom: 4,
           }}
         >
@@ -69,13 +69,13 @@ export default function ProductCard({
             style={{
               fontSize: 16,
               fontFamily: "Poppins_600SemiBold",
-              color: "#2563EB",
+              color: "#F97316",
             }}
           >
             {price}
           </Text>
           <TouchableOpacity onPress={onWishlist}>
-            <Ionicons name="heart-outline" size={18} color="#64748B" />
+            <Ionicons name="heart-outline" size={18} color="#F97316" />
           </TouchableOpacity>
         </View>
 
@@ -83,7 +83,7 @@ export default function ProductCard({
         <Text
           style={{
             fontSize: 11,
-            color: "#64748B",
+            color: "#78716C",
             fontFamily: "Inter_400Regular",
             marginTop: 4,
           }}

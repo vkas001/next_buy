@@ -108,24 +108,17 @@ export default function SearchScreen() {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "#0F172A" }}
+      style={{ flex: 1, backgroundColor: "#FFF7ED" }}
       edges={["top"]}
     >
       {/* Header */}
-      <View
-        style={{
-          alignItems: "center",
-          paddingHorizontal: 24,
-          paddingTop: 16,
-          paddingBottom: 8,
-        }}
-      >
+      <View style={{ paddingHorizontal: 24, paddingTop: 16, paddingBottom: 8 }}>
         <Text
           style={{
-            fontSize: 30,
+            fontSize: 24,
             fontFamily: "Poppins_600SemiBold",
-            color: "#44D1F4",
-            marginBottom: 1,
+            color: "#1C1917",
+            marginBottom: 12,
           }}
         >
           Search
@@ -136,38 +129,38 @@ export default function SearchScreen() {
           style={{
             flexDirection: "row",
             alignItems: "center",
-            backgroundColor: "#1E293B",
+            backgroundColor: "#FFFFFF",
             borderWidth: 1,
-            borderColor: "#334155",
+            borderColor: "#FED7AA",
             borderRadius: 16,
             paddingHorizontal: 16,
-            paddingVertical: 2,
+            paddingVertical: 10,
           }}
         >
-          <Ionicons name="search-outline" size={18} color="#64748B" />
+          <Ionicons name="search-outline" size={18} color="#F97316" />
           <TextInput
             style={{
               flex: 1,
               marginLeft: 10,
               fontSize: 14,
               fontFamily: "Inter_400Regular",
-              color: "#F8FAFC",
+              color: "#1C1917",
             }}
             placeholder="Search products..."
-            placeholderTextColor="#64748B"
+            placeholderTextColor="#A8A29E"
             value={query}
             onChangeText={setQuery}
           />
           {query.length > 0 && (
             <TouchableOpacity onPress={() => setQuery("")}>
-              <Ionicons name="close-circle" size={18} color="#64748B" />
+              <Ionicons name="close-circle" size={18} color="#F97316" />
             </TouchableOpacity>
           )}
         </View>
       </View>
 
       {/* Category Filters */}
-      <View style={{ marginBottom: 16, marginTop: 12 }}>
+      <View style={{ marginBottom: 12, marginTop: 12 }}>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -183,15 +176,15 @@ export default function SearchScreen() {
                 paddingVertical: 8,
                 borderRadius: 999,
                 borderWidth: 1,
-                backgroundColor: activeFilter === item ? "#2563EB" : "#1E293B",
-                borderColor: activeFilter === item ? "#2563EB" : "#334155",
+                backgroundColor: activeFilter === item ? "#F97316" : "#FFFFFF",
+                borderColor: activeFilter === item ? "#F97316" : "#FED7AA",
               }}
             >
               <Text
                 style={{
                   fontSize: 13,
                   fontFamily: "Inter_500Medium",
-                  color: activeFilter === item ? "white" : "#64748B",
+                  color: activeFilter === item ? "white" : "#78716C",
                 }}
               >
                 {item}
@@ -201,6 +194,16 @@ export default function SearchScreen() {
         />
       </View>
 
+      {/* Divider */}
+      <View
+        style={{
+          marginHorizontal: 24,
+          borderBottomWidth: 1,
+          borderBottomColor: "#FED7AA",
+          marginBottom: 12,
+        }}
+      />
+
       {/* Recent Searches */}
       {query.length === 0 && (
         <View style={{ paddingHorizontal: 24, marginBottom: 16 }}>
@@ -208,7 +211,7 @@ export default function SearchScreen() {
             style={{
               fontSize: 13,
               fontFamily: "Inter_500Medium",
-              color: "#64748B",
+              color: "#78716C",
               marginBottom: 12,
             }}
           >
@@ -222,20 +225,20 @@ export default function SearchScreen() {
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
-                  backgroundColor: "#1E293B",
+                  backgroundColor: "#FFFFFF",
                   borderWidth: 1,
-                  borderColor: "#334155",
+                  borderColor: "#FED7AA",
                   borderRadius: 999,
                   paddingHorizontal: 12,
                   paddingVertical: 8,
                 }}
               >
-                <Ionicons name="time-outline" size={14} color="#64748B" />
+                <Ionicons name="time-outline" size={14} color="#F97316" />
                 <Text
                   style={{
                     fontSize: 13,
                     fontFamily: "Inter_400Regular",
-                    color: "#64748B",
+                    color: "#78716C",
                     marginLeft: 6,
                   }}
                 >
@@ -254,7 +257,7 @@ export default function SearchScreen() {
             style={{
               fontSize: 13,
               fontFamily: "Inter_400Regular",
-              color: "#64748B",
+              color: "#78716C",
             }}
           >
             {filteredProducts.length} results for "{query}"
@@ -276,12 +279,12 @@ export default function SearchScreen() {
               paddingVertical: 80,
             }}
           >
-            <Ionicons name="search-outline" size={48} color="#64748B" />
+            <Ionicons name="search-outline" size={48} color="#FED7AA" />
             <Text
               style={{
                 fontSize: 16,
                 fontFamily: "Inter_400Regular",
-                color: "#64748B",
+                color: "#78716C",
                 marginTop: 16,
               }}
             >
@@ -291,7 +294,7 @@ export default function SearchScreen() {
               style={{
                 fontSize: 13,
                 fontFamily: "Inter_400Regular",
-                color: "#64748B",
+                color: "#A8A29E",
                 marginTop: 4,
               }}
             >
@@ -304,9 +307,9 @@ export default function SearchScreen() {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              backgroundColor: "#1E293B",
+              backgroundColor: "#FFFFFF",
               borderWidth: 1,
-              borderColor: "#334155",
+              borderColor: "#FED7AA",
               borderRadius: 16,
               padding: 12,
               marginBottom: 12,
@@ -317,14 +320,16 @@ export default function SearchScreen() {
               style={{
                 width: 64,
                 height: 64,
-                backgroundColor: "#334155",
+                backgroundColor: "#FFF7ED",
                 borderRadius: 12,
                 alignItems: "center",
                 justifyContent: "center",
                 marginRight: 12,
+                borderWidth: 1,
+                borderColor: "#FED7AA",
               }}
             >
-              <Ionicons name="image-outline" size={24} color="#64748B" />
+              <Ionicons name="image-outline" size={24} color="#F97316" />
             </View>
 
             {/* Product Info */}
@@ -333,7 +338,7 @@ export default function SearchScreen() {
                 style={{
                   fontSize: 14,
                   fontFamily: "Inter_500Medium",
-                  color: "#F8FAFC",
+                  color: "#1C1917",
                   marginBottom: 4,
                 }}
               >
@@ -343,7 +348,7 @@ export default function SearchScreen() {
                 style={{
                   fontSize: 12,
                   fontFamily: "Inter_400Regular",
-                  color: "#64748B",
+                  color: "#78716C",
                   marginBottom: 4,
                 }}
               >
@@ -353,7 +358,7 @@ export default function SearchScreen() {
                 style={{
                   fontSize: 16,
                   fontFamily: "Poppins_600SemiBold",
-                  color: "#2563EB",
+                  color: "#F97316",
                 }}
               >
                 {item.price}
@@ -362,7 +367,7 @@ export default function SearchScreen() {
 
             {/* Wishlist */}
             <TouchableOpacity style={{ padding: 8 }}>
-              <Ionicons name="heart-outline" size={20} color="#64748B" />
+              <Ionicons name="heart-outline" size={20} color="#F97316" />
             </TouchableOpacity>
           </TouchableOpacity>
         )}
