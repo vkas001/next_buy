@@ -16,7 +16,7 @@ export default function Banner({
   return (
     <View
       style={{
-        backgroundColor: "#2563EB",
+        backgroundColor: "#F97316",
         borderRadius: 24,
         padding: 20,
         flexDirection: "row",
@@ -27,16 +27,26 @@ export default function Banner({
       {/* Left Content */}
       <View style={{ flex: 1 }}>
         {/* Tag */}
-        <Text
+        <View
           style={{
-            fontSize: 11,
-            color: "rgba(255,255,255,0.8)",
-            marginBottom: 4,
-            fontFamily: "Inter_500Medium",
+            alignSelf: "flex-start",
+            backgroundColor: "rgba(255,255,255,0.25)",
+            borderRadius: 999,
+            paddingHorizontal: 10,
+            paddingVertical: 3,
+            marginBottom: 8,
           }}
         >
-          {tag}
-        </Text>
+          <Text
+            style={{
+              fontSize: 10,
+              color: "white",
+              fontFamily: "Inter_500Medium",
+            }}
+          >
+            {tag}
+          </Text>
+        </View>
 
         {/* Title */}
         <Text
@@ -54,8 +64,8 @@ export default function Banner({
         <Text
           style={{
             fontSize: 11,
-            color: "rgba(255,255,255,0.7)",
-            marginBottom: 12,
+            color: "rgba(255,255,255,0.85)",
+            marginBottom: 14,
             fontFamily: "Inter_400Regular",
           }}
         >
@@ -75,25 +85,36 @@ export default function Banner({
         >
           <Text
             style={{
-              color: "#2563EB",
+              color: "#F97316",
               fontSize: 12,
               fontFamily: "Inter_500Medium",
             }}
           >
-            Shop Now
+            Shop Now →
           </Text>
         </TouchableOpacity>
       </View>
 
-      {/* Decorative Circle */}
-      <View
-        style={{
-          width: 80,
-          height: 80,
-          backgroundColor: "rgba(255,255,255,0.2)",
-          borderRadius: 40,
-        }}
-      />
+      {/* Decorative Circles */}
+      <View style={{ alignItems: "center", justifyContent: "center" }}>
+        <View
+          style={{
+            width: 70,
+            height: 70,
+            backgroundColor: "rgba(255,255,255,0.2)",
+            borderRadius: 35,
+          }}
+        />
+        <View
+          style={{
+            width: 40,
+            height: 40,
+            backgroundColor: "rgba(255,255,255,0.15)",
+            borderRadius: 20,
+            position: "absolute",
+          }}
+        />
+      </View>
     </View>
   );
 }

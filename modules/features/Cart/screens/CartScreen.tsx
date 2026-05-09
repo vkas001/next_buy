@@ -24,7 +24,7 @@ export default function CartScreen() {
 
   return (
     <SafeAreaView
-      className="flex-1 bg-background dark:bg-darkBackground"
+      style={{ flex: 1, backgroundColor: "#FFF7ED" }}
       edges={["top"]}
     >
       {/* Header */}

@@ -8,9 +8,7 @@ import "../global.css";
 export default function RootLayout() {
   const { fontsLoaded, error } = useLoadFonts(); // ← destructure now
   const colorScheme = useColorScheme();
-  const backgroundColor = colorScheme === "dark" ? "#0F172A" : "#F8FAFC";
-
-  // If fonts fail, continue without them (app still works)
+  const backgroundColor = "#FFF7ED"; // If fonts fail, continue without them (app still works)
   if (!fontsLoaded && !error) {
     return <View style={{ flex: 1, backgroundColor }} />;
   }

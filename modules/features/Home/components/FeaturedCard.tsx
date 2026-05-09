@@ -24,9 +24,9 @@ export default function FeaturedCard({
       style={{
         width: 160,
         marginRight: 16,
-        backgroundColor: "#1E293B",
+        backgroundColor: "#FFFFFF",
         borderWidth: 1,
-        borderColor: "#334155",
+        borderColor: "#FED7AA",
         borderRadius: 16,
         overflow: "hidden",
       }}
@@ -36,12 +36,12 @@ export default function FeaturedCard({
         style={{
           width: "100%",
           height: 128,
-          backgroundColor: "#334155",
+          backgroundColor: "#FFF7ED",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <Ionicons name="image-outline" size={40} color="#64748B" />
+        <Ionicons name="image-outline" size={40} color="#FED7AA" />
       </View>
 
       {/* Info */}
@@ -50,7 +50,7 @@ export default function FeaturedCard({
         <View
           style={{
             alignSelf: "flex-start",
-            backgroundColor: "#10B981",
+            backgroundColor: "#F97316",
             borderRadius: 999,
             paddingHorizontal: 8,
             paddingVertical: 2,
@@ -74,7 +74,7 @@ export default function FeaturedCard({
           style={{
             fontSize: 14,
             fontFamily: "Inter_500Medium",
-            color: "#F8FAFC",
+            color: "#1C1917",
             marginBottom: 4,
           }}
         >
@@ -85,7 +85,7 @@ export default function FeaturedCard({
         <Text
           style={{
             fontSize: 11,
-            color: "#64748B",
+            color: "#78716C",
             fontFamily: "Inter_400Regular",
             marginBottom: 4,
           }}
@@ -98,7 +98,7 @@ export default function FeaturedCard({
           style={{
             fontSize: 16,
             fontFamily: "Poppins_600SemiBold",
-            color: "#2563EB",
+            color: "#F97316",
           }}
         >
           {price}
@@ -108,7 +108,7 @@ export default function FeaturedCard({
         <Text
           style={{
             fontSize: 11,
-            color: "#64748B",
+            color: "#A8A29E",
             fontFamily: "Inter_400Regular",
             textDecorationLine: "line-through",
           }}

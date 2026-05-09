@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import {
   RefreshControl,
   ScrollView,
@@ -84,7 +85,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "#0F172A" }}
+      style={{ flex: 1, backgroundColor: "#FFF7ED" }}
       edges={["top"]}
     >
       {/* Header */}
@@ -95,7 +96,7 @@ export default function HomeScreen() {
         style={{
           marginHorizontal: 24,
           borderBottomWidth: 1,
-          borderBottomColor: "#1E293B",
+          borderBottomColor: "#FED7AA",
           marginBottom: 8,
         }}
       />
@@ -108,13 +109,13 @@ export default function HomeScreen() {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            tintColor="#2563EB"
-            colors={["#2563EB"]}
+            tintColor="#F97316"
+            colors={["#F97316"]}
           />
         }
       >
         {/* Promo Banner */}
-        <View style={{ paddingHorizontal: 24, marginBottom: 24 }}>
+        <View style={{ paddingHorizontal: 24, marginBottom: 24, marginTop: 8 }}>
           <Banner
             tag="LIMITED TIME OFFER"
             title="Up to 50% Off"
@@ -146,7 +147,7 @@ export default function HomeScreen() {
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: 20 }}
+            contentContainerStyle={{ paddingHorizontal: 24 }}
           >
             {featuredProducts.map((product) => (
               <FeaturedCard
@@ -156,6 +157,7 @@ export default function HomeScreen() {
                 originalPrice={product.originalPrice}
                 condition={product.condition}
                 discount={product.discount}
+                onPress={() => router.push(`/product/${product.id}`)}
               />
             ))}
           </ScrollView>
@@ -177,6 +179,7 @@ export default function HomeScreen() {
                 name={product.name}
                 price={product.price}
                 condition={product.condition}
+                onPress={() => router.push(`/product/${product.id}`)}
               />
             ))}
           </View>
@@ -185,13 +188,14 @@ export default function HomeScreen() {
 
       {/* Floating Sell Button */}
       <TouchableOpacity
+        onPress={() => router.push("/sell")}
         style={{
           position: "absolute",
           bottom: 80,
           right: 24,
           width: 56,
           height: 56,
-          backgroundColor: "#10B981",
+          backgroundColor: "#F97316",
           borderRadius: 28,
           alignItems: "center",
           justifyContent: "center",

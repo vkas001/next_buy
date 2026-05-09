@@ -15,23 +15,23 @@ export default function CategoryCard({
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={{ width: 70, alignItems: "center", marginRight: 1 }}
+      style={{ width: 72, alignItems: "center", marginRight: 12 }}
     >
       {/* Icon Box */}
       <View
         style={{
           width: 56,
           height: 56,
-          backgroundColor: "#1E293B",
+          backgroundColor: "#FFFFFF",
           borderWidth: 1,
-          borderColor: "#334155",
-          borderRadius: 29,
+          borderColor: "#FED7AA",
+          borderRadius: 28,
           alignItems: "center",
           justifyContent: "center",
           marginBottom: 8,
         }}
       >
-        <Ionicons name={icon as any} size={24} color="#1CD9B9" />
+        <Ionicons name={icon as any} size={24} color="#F97316" />
       </View>
 
       {/* Label */}
@@ -39,7 +39,7 @@ export default function CategoryCard({
         numberOfLines={1}
         style={{
           fontSize: 11,
-          color: "white",
+          color: "#78716C",
           textAlign: "center",
           fontFamily: "Inter_400Regular",
         }}
