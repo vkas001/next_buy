@@ -201,7 +201,7 @@ export default function ProfileScreen() {
         style={{
           marginHorizontal: 24,
           borderBottomWidth: 1,
-          borderBottomColor: "#1E293B",
+          borderBottomColor: "#FED7AA",
           marginBottom: 8,
         }}
       />
@@ -227,6 +227,7 @@ export default function ProfileScreen() {
           <ProfileMenu
             key={section.title}
             title={section.title}
+            // Pass the items belonging to this specific section
             items={section.items}
           />
         ))}

@@ -14,7 +14,7 @@ export default function ProfileHeader({ onSettings }: ProfileHeaderProps) {
         justifyContent: "space-between",
         paddingHorizontal: 24,
         paddingTop: 16,
-        paddingBottom: 10,
+        paddingBottom: 1,
       }}
     >
       {/* Title */}
@@ -22,18 +22,18 @@ export default function ProfileHeader({ onSettings }: ProfileHeaderProps) {
         style={{
           fontSize: 30,
           fontFamily: "Poppins_600SemiBold",
-          color: "black",
+          color: "#F97316",
         }}
       >
-        Profile
+        Profile👤
       </Text>
 
       {/* Settings */}
       <TouchableOpacity
         onPress={onSettings}
         style={{
-          width: 40,
-          height: 40,
+          width: 33,
+          height: 33,
           backgroundColor: "#FFFFFF",
           borderRadius: 20,
           alignItems: "center",

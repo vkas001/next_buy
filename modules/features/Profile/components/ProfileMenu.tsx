@@ -34,7 +34,7 @@ export default function ProfileMenu({ title, items }: ProfileMenuProps) {
         style={{
           backgroundColor: "#FFFFFF",
           borderWidth: 1,
-          borderColor: "#334155",
+          borderColor: "#FED7AA",
           borderRadius: 16,
           overflow: "hidden",
         }}

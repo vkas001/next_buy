@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 import { CartSummaryData } from "../types";
 
@@ -59,7 +60,7 @@ export default function CartSummary({ summary, onCheckout }: CartSummaryProps) {
 
       {/* Checkout Button */}
       <TouchableOpacity
-        onPress={onCheckout}
+        onPress={() => router.push("/checkout")}
         className="bg-primary dark:bg-darkPrimary rounded-2xl py-4 items-center"
       >
         <Text className="text-base font-bodyMedium text-white">

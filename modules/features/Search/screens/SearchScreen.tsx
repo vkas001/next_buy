@@ -115,14 +115,16 @@ export default function SearchScreen() {
       <View style={{ paddingHorizontal: 24, paddingTop: 16, paddingBottom: 8 }}>
         <Text
           style={{
-            fontSize: 24,
+            fontSize: 29,
             fontFamily: "Poppins_600SemiBold",
-            color: "#1C1917",
-            marginBottom: 12,
+            color: "#f97316",
+            marginBottom: 3,
           }}
         >
-          Search
+          Search🔎
         </Text>
+        {/* Divider */}
+        <View className="mx-22 border-b border-border dark:border-darkBorder mb-4" />
 
         {/* Search Input */}
         <View
