@@ -29,7 +29,7 @@ export default function CartScreen() {
     >
       {/* Header */}
       <View className="flex-row items-center justify-between px-6 pt-4 pb-1">
-        <Text className="text-3xl font-heading text-textPrimary dark:text-darkTextPrimary">
+        <Text className="text-3xl font-heading text-orange-500 ">
           My Cart🛒
         </Text>
         {cartItems.length > 0 && (

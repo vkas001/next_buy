@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 
 interface ProfileCardProps {
@@ -54,7 +55,7 @@ export default function ProfileCard({
         >
           <Text
             style={{
-              fontSize: 22,
+              fontSize: 28,
               fontFamily: "Poppins_600SemiBold",
               color: "white",
             }}
@@ -67,9 +68,9 @@ export default function ProfileCard({
         <View style={{ flex: 1 }}>
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 20,
               fontFamily: "Poppins_600SemiBold",
-              color: "#F8FAFC",
+              color: "black",
             }}
           >
             {name}
@@ -102,7 +103,7 @@ export default function ProfileCard({
 
         {/* Edit Button */}
         <TouchableOpacity
-          onPress={onEdit}
+          onPress={() => router.push("/profile/edit")}
           style={{
             backgroundColor: "#2563EB",
             borderRadius: 12,
@@ -129,7 +130,7 @@ export default function ProfileCard({
           justifyContent: "space-between",
           paddingTop: 16,
           borderTopWidth: 1,
-          borderTopColor: "#334155",
+          borderTopColor: "#FED7AA",
         }}
       >
         {[
@@ -143,7 +144,7 @@ export default function ProfileCard({
               style={{
                 fontSize: 18,
                 fontFamily: "Poppins_600SemiBold",
-                color: "#F8FAFC",
+                color: "black",
               }}
             >
               {stat.value}
@@ -165,7 +166,7 @@ export default function ProfileCard({
                   top: 0,
                   bottom: 0,
                   width: 1,
-                  backgroundColor: "#334155",
+                  backgroundColor: "#FED7AA",
                 }}
               />
             )}
