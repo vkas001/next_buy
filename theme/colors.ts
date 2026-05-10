@@ -1,29 +1,30 @@
 export const light = {
-    primary: '#2563EB',
-    primaryLight: '#60A5FA',
+  primary: "#F97316", // vibrant orange
+  primaryLight: "#FDBA74",
 
-    secondary: '#10B981',
-    secondaryLight: '#6EE7B7',
+  secondary: "#8B5CF6", // purple
+  secondaryLight: "#C4B5FD",
 
-    background: '#F8FAFC',
-    card: '#FFFFFF',
-    border: '#E2E8F0',
+  background: "#FFF7ED", // warm cream
+  card: "#FFFFFF",
+  border: "#FED7AA",
 
-    textPrimary: '#0F172A',
-    textSecondary: '#64748B',
+  textPrimary: "#1C1917",
+  textSecondary: "#78716C",
 };
 
+// Keep dark same as light - no dark theme
 export const dark = {
-    primary: '#3B82F6',
-    primaryLight: '#93C5FD',
+  primary: "#F97316",
+  primaryLight: "#FDBA74",
 
-    secondary: '#34D399',
-    secondaryLight: '#A7F3D0',
+  secondary: "#8B5CF6",
+  secondaryLight: "#C4B5FD",
 
-    background: '#0F172A',
-    card: '#1E293B',
-    border: '#334155',
+  background: "#FFF7ED",
+  card: "#FFFFFF",
+  border: "#FED7AA",
 
-    textPrimary: '#F8FAFC',
-    textSecondary: '#CBD5E1',
+  textPrimary: "#1C1917",
+  textSecondary: "#78716C",
 };

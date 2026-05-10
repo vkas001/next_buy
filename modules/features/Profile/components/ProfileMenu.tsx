@@ -32,7 +32,7 @@ export default function ProfileMenu({ title, items }: ProfileMenuProps) {
       {/* Items */}
       <View
         style={{
-          backgroundColor: "#1E293B",
+          backgroundColor: "#FFFFFF",
           borderWidth: 1,
           borderColor: "#334155",
           borderRadius: 16,
@@ -49,7 +49,7 @@ export default function ProfileMenu({ title, items }: ProfileMenuProps) {
               paddingHorizontal: 16,
               paddingVertical: 16,
               borderBottomWidth: index !== items.length - 1 ? 1 : 0,
-              borderBottomColor: "#334155",
+              borderBottomColor: "#FED7AA",
             }}
           >
             {/* Icon */}
@@ -57,7 +57,7 @@ export default function ProfileMenu({ title, items }: ProfileMenuProps) {
               style={{
                 width: 32,
                 height: 32,
-                backgroundColor: "#0F172A",
+                backgroundColor: "#FFF7ED",
                 borderRadius: 10,
                 alignItems: "center",
                 justifyContent: "center",
@@ -73,7 +73,7 @@ export default function ProfileMenu({ title, items }: ProfileMenuProps) {
                 flex: 1,
                 fontSize: 14,
                 fontFamily: "Inter_400Regular",
-                color: "#F8FAFC",
+                color: "#1C1917",
               }}
             >
               {item.label}

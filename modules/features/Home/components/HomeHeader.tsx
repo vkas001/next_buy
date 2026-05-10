@@ -27,21 +27,21 @@ export default function HomeHeader({
       <View>
         <Text
           style={{
-            fontSize: 45,
-            color: "#1CD9B9",
-            fontFamily: "Inter_400Regular",
-          }}
-        >
-          🛍️NextBuy
-        </Text>
-        <Text
-          style={{
-            fontSize: 20,
-            color: "#F8FAFC",
+            fontSize: 28,
+            color: "#F97316",
             fontFamily: "Poppins_600SemiBold",
           }}
         >
-          Find Great Deals..
+          🛍️ NextBuy
+        </Text>
+        <Text
+          style={{
+            fontSize: 14,
+            color: "#78716C",
+            fontFamily: "Inter_400Regular",
+          }}
+        >
+          Find Great Deals
         </Text>
       </View>
 
@@ -53,15 +53,15 @@ export default function HomeHeader({
           style={{
             width: 40,
             height: 40,
-            backgroundColor: "#1E293B",
+            backgroundColor: "#FFFFFF",
             borderRadius: 20,
             alignItems: "center",
             justifyContent: "center",
             borderWidth: 1,
-            borderColor: "#334155",
+            borderColor: "#FED7AA",
           }}
         >
-          <Ionicons name="notifications-outline" size={20} color="#64748B" />
+          <Ionicons name="notifications-outline" size={20} color="#F97316" />
         </TouchableOpacity>
 
         {/* Avatar */}
@@ -70,7 +70,7 @@ export default function HomeHeader({
           style={{
             width: 40,
             height: 40,
-            backgroundColor: "#2563EB",
+            backgroundColor: "#F97316",
             borderRadius: 20,
             alignItems: "center",
             justifyContent: "center",

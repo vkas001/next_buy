@@ -29,9 +29,9 @@ export default function ProfileCard({
       style={{
         marginHorizontal: 24,
         marginBottom: 24,
-        backgroundColor: "#1E293B",
+        backgroundColor: "#FFFFFF",
         borderWidth: 1,
-        borderColor: "#334155",
+        borderColor: "#FED7AA",
         borderRadius: 24,
         padding: 20,
       }}

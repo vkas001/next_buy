@@ -14,15 +14,15 @@ export default function ProfileHeader({ onSettings }: ProfileHeaderProps) {
         justifyContent: "space-between",
         paddingHorizontal: 24,
         paddingTop: 16,
-        paddingBottom: 16,
+        paddingBottom: 10,
       }}
     >
       {/* Title */}
       <Text
         style={{
-          fontSize: 20,
+          fontSize: 30,
           fontFamily: "Poppins_600SemiBold",
-          color: "#F8FAFC",
+          color: "black",
         }}
       >
         Profile
@@ -34,12 +34,12 @@ export default function ProfileHeader({ onSettings }: ProfileHeaderProps) {
         style={{
           width: 40,
           height: 40,
-          backgroundColor: "#1E293B",
+          backgroundColor: "#FFFFFF",
           borderRadius: 20,
           alignItems: "center",
           justifyContent: "center",
           borderWidth: 1,
-          borderColor: "#334155",
+          borderColor: "#FED7AA",
         }}
       >
         <Ionicons name="settings-outline" size={20} color="#64748B" />
