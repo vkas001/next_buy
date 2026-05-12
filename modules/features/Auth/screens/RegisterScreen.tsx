@@ -16,7 +16,7 @@ export default function RegisterScreen() {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "#0F172A" }}
+      style={{ flex: 1, backgroundColor: "#FFF7ED" }}
       edges={["top"]}
     >
       <ScrollView
@@ -37,7 +37,7 @@ export default function RegisterScreen() {
             style={{
               fontSize: 47,
               fontFamily: "Poppins_600SemiBold",
-              color: "#F8FAFC",
+              color: "#F97316",
 
               textAlign: "center",
             }}
@@ -48,19 +48,19 @@ export default function RegisterScreen() {
           {/* Full Name */}
           <Text
             style={{
-              fontSize: 13,
+              fontSize: 16,
               fontFamily: "Inter_500Medium",
-              color: "white",
+              color: "black",
               marginBottom: 8,
             }}
           >
-            Full Name
+            Full Name:
           </Text>
           <View
             style={{
-              backgroundColor: "#1E293B",
+              backgroundColor: "#FFF7ED",
               borderWidth: 1,
-              borderColor: "#334155",
+              borderColor: "#FED7AA",
               borderRadius: 16,
               paddingHorizontal: 16,
 
@@ -71,7 +71,7 @@ export default function RegisterScreen() {
               style={{
                 fontSize: 14,
                 fontFamily: "Inter_400Regular",
-                color: "#F8FAFC",
+                color: "black",
               }}
               placeholder="Your Name"
               placeholderTextColor="#64748B"
@@ -82,19 +82,19 @@ export default function RegisterScreen() {
           {/* Email */}
           <Text
             style={{
-              fontSize: 13,
+              fontSize: 16,
               fontFamily: "Inter_500Medium",
-              color: "white",
+              color: "black",
               marginBottom: 8,
             }}
           >
-            Email address
+            Email address:
           </Text>
           <View
             style={{
-              backgroundColor: "#1E293B",
+              backgroundColor: "#FFF7ED",
               borderWidth: 1,
-              borderColor: "#334155",
+              borderColor: "#FED7AA",
               borderRadius: 16,
               paddingHorizontal: 16,
 
@@ -105,7 +105,7 @@ export default function RegisterScreen() {
               style={{
                 fontSize: 14,
                 fontFamily: "Inter_400Regular",
-                color: "#F8FAFC",
+                color: "black",
               }}
               placeholder="you@example.com"
               placeholderTextColor="#64748B"
@@ -117,21 +117,21 @@ export default function RegisterScreen() {
           {/* Password */}
           <Text
             style={{
-              fontSize: 13,
+              fontSize: 16,
               fontFamily: "Inter_500Medium",
-              color: "white",
+              color: "black",
               marginBottom: 8,
             }}
           >
-            Password
+            Password:
           </Text>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
-              backgroundColor: "#1E293B",
+              backgroundColor: "#FFF7ED",
               borderWidth: 1,
-              borderColor: "#334155",
+              borderColor: "#FED7AA",
               borderRadius: 16,
               paddingHorizontal: 16,
               marginBottom: 16,
@@ -142,7 +142,7 @@ export default function RegisterScreen() {
                 flex: 1,
                 fontSize: 14,
                 fontFamily: "Inter_400Regular",
-                color: "#F8FAFC",
+                color: "black",
                 paddingVertical: 14,
               }}
               placeholder="Create a password"
@@ -161,21 +161,21 @@ export default function RegisterScreen() {
           {/* Confirm Password */}
           <Text
             style={{
-              fontSize: 13,
+              fontSize: 16,
               fontFamily: "Inter_500Medium",
-              color: "white",
+              color: "black",
               marginBottom: 8,
             }}
           >
-            Confirm Password
+            Confirm Password:
           </Text>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
-              backgroundColor: "#1E293B",
+              backgroundColor: "#FFF7ED",
               borderWidth: 1,
-              borderColor: "#334155",
+              borderColor: "#FED7AA",
               borderRadius: 16,
               paddingHorizontal: 16,
               marginBottom: 32,
@@ -186,7 +186,7 @@ export default function RegisterScreen() {
                 flex: 1,
                 fontSize: 14,
                 fontFamily: "Inter_400Regular",
-                color: "#F8FAFC",
+                color: "black",
                 paddingVertical: 16,
               }}
               placeholder="Repeat your password"

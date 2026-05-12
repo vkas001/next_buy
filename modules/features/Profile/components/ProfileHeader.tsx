@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 
 interface ProfileHeaderProps {
@@ -30,7 +31,7 @@ export default function ProfileHeader({ onSettings }: ProfileHeaderProps) {
 
       {/* Settings */}
       <TouchableOpacity
-        onPress={onSettings}
+        onPress={() => router.push("/settings")}
         style={{
           width: 33,
           height: 33,

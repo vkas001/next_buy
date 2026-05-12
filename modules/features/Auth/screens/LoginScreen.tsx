@@ -15,7 +15,7 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: "#0F172A" }}
+      style={{ flex: 1, backgroundColor: "#FFF7ED" }}
       edges={["top"]}
     >
       <ScrollView
@@ -35,7 +35,7 @@ export default function LoginScreen() {
           <Text
             style={{
               fontSize: 50,
-              color: "#10B981",
+              color: "#F97316",
               marginBottom: 1,
               textAlign: "center",
             }}
@@ -48,7 +48,7 @@ export default function LoginScreen() {
             style={{
               fontSize: 32,
               fontFamily: "Poppins_600SemiBold",
-              color: "#F8FAFC",
+              color: "#1C1917",
               marginBottom: 8,
               textAlign: "center",
             }}
@@ -59,19 +59,19 @@ export default function LoginScreen() {
           {/* Email */}
           <Text
             style={{
-              fontSize: 13,
+              fontSize: 16,
               fontFamily: "Inter_500Medium",
-              color: "white",
+              color: "black",
               marginBottom: 8,
             }}
           >
-            Email address
+            Email address:
           </Text>
           <View
             style={{
-              backgroundColor: "#1E293B",
+              backgroundColor: "#FFF7ED",
               borderWidth: 1,
-              borderColor: "#334155",
+              borderColor: "#FED7AA",
               borderRadius: 16,
               paddingHorizontal: 16,
               paddingVertical: 3,
@@ -82,7 +82,7 @@ export default function LoginScreen() {
               style={{
                 fontSize: 14,
                 fontFamily: "Inter_400Regular",
-                color: "#F8FAFC",
+                color: "black",
               }}
               placeholder="you@example.com"
               placeholderTextColor="#64748B"
@@ -94,21 +94,21 @@ export default function LoginScreen() {
           {/* Password */}
           <Text
             style={{
-              fontSize: 13,
+              fontSize: 16,
               fontFamily: "Inter_500Medium",
-              color: "white",
+              color: "black",
               marginBottom: 8,
             }}
           >
-            Password
+            Password:
           </Text>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
-              backgroundColor: "#1E293B",
+              backgroundColor: "#FFF7ED",
               borderWidth: 1,
-              borderColor: "#334155",
+              borderColor: "#FED7AA",
               borderRadius: 16,
               paddingHorizontal: 16,
               marginBottom: 8,
@@ -119,7 +119,7 @@ export default function LoginScreen() {
                 flex: 1,
                 fontSize: 14,
                 fontFamily: "Inter_400Regular",
-                color: "#F8FAFC",
+                color: "black",
                 paddingVertical: 14,
               }}
               placeholder="Enter your password"
@@ -185,7 +185,7 @@ export default function LoginScreen() {
               style={{
                 fontSize: 12,
                 fontFamily: "Inter_400Regular",
-                color: "white",
+                color: "black",
                 marginHorizontal: 12,
               }}
             >
@@ -206,7 +206,7 @@ export default function LoginScreen() {
               style={{
                 fontSize: 13,
                 fontFamily: "Inter_400Regular",
-                color: "white",
+                color: "black",
               }}
             >
               Don't have an account?{" "}
