@@ -1,71 +1,66 @@
-import { router } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
-import { CartSummaryData } from "../types";
 
 interface CartSummaryProps {
-  summary: CartSummaryData;
+  summary?: {
+    subtotal?: number;
+    shipping?: number;
+    total?: number;
+  };
   onCheckout: () => void;
 }
 
 export default function CartSummary({ summary, onCheckout }: CartSummaryProps) {
+  // ✅ SAFE FALLBACKS (prevents crashes)
+  const subtotal = summary?.subtotal ?? 0;
+  const shipping = summary?.shipping ?? 0;
+  const total = summary?.total ?? 0;
+
   return (
-    <View className="bg-card dark:bg-darkCard border border-border dark:border-darkBorder rounded-2xl p-5 mx-6 mb-10">
+    <View className="mx-6 bg-card dark:bg-darkCard border border-border dark:border-darkBorder rounded-2xl p-4">
       {/* Title */}
-      <Text className="text-base font-heading text-textPrimary dark:text-darkTextPrimary mb-4">
+      <Text className="text-base font-heading text-textPrimary dark:text-darkTextPrimary mb-3">
         Order Summary
       </Text>
 
       {/* Subtotal */}
-      <View className="flex-row items-center justify-between mb-3">
+      <View className="flex-row justify-between mb-2">
         <Text className="text-sm font-body text-textSecondary dark:text-darkTextSecondary">
           Subtotal
         </Text>
-        <Text className="text-sm font-bodyMedium text-textPrimary dark:text-darkTextPrimary">
-          Rs. {summary.subtotal.toLocaleString()}
+        <Text className="text-sm font-body text-textPrimary dark:text-darkTextPrimary">
+          Rs. {subtotal.toLocaleString()}
         </Text>
       </View>
 
-      {/* Discount */}
-      <View className="flex-row items-center justify-between mb-3">
+      {/* Shipping */}
+      <View className="flex-row justify-between mb-2">
         <Text className="text-sm font-body text-textSecondary dark:text-darkTextSecondary">
-          Discount
+          Shipping
         </Text>
-        <Text className="text-sm font-bodyMedium text-secondary">
-          - Rs. {summary.discount.toLocaleString()}
-        </Text>
-      </View>
-
-      {/* Delivery */}
-      <View className="flex-row items-center justify-between mb-4">
-        <Text className="text-sm font-body text-textSecondary dark:text-darkTextSecondary">
-          Delivery Fee
-        </Text>
-        <Text className="text-sm font-bodyMedium text-textPrimary dark:text-darkTextPrimary">
-          Rs. {summary.deliveryFee.toLocaleString()}
+        <Text className="text-sm font-body text-textPrimary dark:text-darkTextPrimary">
+          Rs. {shipping.toLocaleString()}
         </Text>
       </View>
 
       {/* Divider */}
-      <View className="border-t border-border dark:border-darkBorder mb-4" />
+      <View className="border-b border-border dark:border-darkBorder my-3" />
 
       {/* Total */}
-      <View className="flex-row items-center justify-between mb-6">
+      <View className="flex-row justify-between mb-4">
         <Text className="text-base font-heading text-textPrimary dark:text-darkTextPrimary">
           Total
         </Text>
-        <Text className="text-xl font-heading text-primary dark:text-darkPrimary">
-          Rs. {summary.total.toLocaleString()}
+        <Text className="text-base font-heading text-primary">
+          Rs. {total.toLocaleString()}
         </Text>
       </View>
 
       {/* Checkout Button */}
       <TouchableOpacity
-        onPress={() => router.push("/checkout")}
-        className="bg-primary dark:bg-darkPrimary rounded-2xl py-4 items-center"
+        onPress={onCheckout}
+        className="bg-primary py-3 rounded-xl items-center"
       >
-        <Text className="text-base font-bodyMedium text-white">
-          Proceed to Checkout
-        </Text>
+        <Text className="text-white font-heading">Proceed to Checkout</Text>
       </TouchableOpacity>
     </View>
   );

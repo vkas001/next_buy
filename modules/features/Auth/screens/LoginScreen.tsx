@@ -1,3 +1,4 @@
+import { useAuth } from "@/modules/shared/context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -12,7 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const { login } = useAuth();
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#FFF7ED" }}
@@ -152,11 +153,23 @@ export default function LoginScreen() {
 
           {/* Sign in Button */}
           <TouchableOpacity
+            onPress={() => {
+              // TODO: backend will validate credentials
+              // Temporary dummy login
+              login({
+                id: "1",
+                name: "John Doe",
+                email: "john@example.com",
+                avatar: "JD",
+                location: "Kathmandu, Nepal",
+              });
+
+              router.replace("/(tabs)");
+            }}
             style={{
-              backgroundColor: "#2563EB",
+              backgroundColor: "#F97316",
               borderRadius: 16,
-              paddingVertical: 10,
-              paddingHorizontal: 10,
+              paddingVertical: 16,
               alignItems: "center",
               marginBottom: 16,
             }}

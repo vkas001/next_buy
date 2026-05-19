@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import { useState } from "react";
 import {
   FlatList,
@@ -9,8 +10,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-// Dummy data - will be replaced by backend API later
 const allProducts = [
+  // Electronics
   {
     id: "1",
     name: "iPhone 13 Pro",
@@ -20,77 +21,163 @@ const allProducts = [
   },
   {
     id: "2",
-    name: "Nike Air Max",
-    price: "Rs. 3,500",
-    condition: "Like New",
-    category: "Fashion",
-  },
-  {
-    id: "3",
     name: "Sony Headphones",
     price: "Rs. 8,000",
     condition: "Good",
     category: "Electronics",
   },
   {
-    id: "4",
+    id: "3",
     name: "MacBook Air M1",
     price: "Rs. 85,000",
     condition: "Like New",
     category: "Electronics",
   },
   {
-    id: "5",
+    id: "4",
     name: "Canon DSLR Camera",
     price: "Rs. 25,000",
     condition: "Good",
     category: "Electronics",
   },
   {
-    id: "6",
-    name: "Gaming Chair",
-    price: "Rs. 12,000",
-    condition: "Like New",
-    category: "Furniture",
-  },
-  {
-    id: "7",
+    id: "5",
     name: "Smart Watch",
     price: "Rs. 5,500",
     condition: "Fair",
     category: "Electronics",
   },
+
+  // Fashion
   {
-    id: "8",
+    id: "6",
+    name: "Nike Air Max",
+    price: "Rs. 3,500",
+    condition: "Like New",
+    category: "Fashion",
+  },
+  {
+    id: "7",
     name: "Leather Jacket",
     price: "Rs. 2,800",
     condition: "Good",
     category: "Fashion",
   },
   {
+    id: "8",
+    name: "Levi's Jeans",
+    price: "Rs. 1,800",
+    condition: "Good",
+    category: "Fashion",
+  },
+  {
     id: "9",
+    name: "Adidas Hoodie",
+    price: "Rs. 1,200",
+    condition: "Like New",
+    category: "Fashion",
+  },
+
+  // Furniture
+  {
+    id: "10",
+    name: "Gaming Chair",
+    price: "Rs. 12,000",
+    condition: "Like New",
+    category: "Furniture",
+  },
+  {
+    id: "11",
     name: "Study Table",
     price: "Rs. 4,500",
     condition: "Good",
     category: "Furniture",
   },
   {
-    id: "10",
-    name: "Guitar",
-    price: "Rs. 7,000",
+    id: "12",
+    name: "Bookshelf",
+    price: "Rs. 3,200",
+    condition: "Good",
+    category: "Furniture",
+  },
+  {
+    id: "13",
+    name: "Office Chair",
+    price: "Rs. 6,000",
     condition: "Like New",
-    category: "Music",
+    category: "Furniture",
+  },
+
+  // Books
+  {
+    id: "14",
+    name: "Harry Potter Set",
+    price: "Rs. 1,500",
+    condition: "Good",
+    category: "Books",
+  },
+  {
+    id: "15",
+    name: "Rich Dad Poor Dad",
+    price: "Rs. 300",
+    condition: "Like New",
+    category: "Books",
+  },
+  {
+    id: "16",
+    name: "Atomic Habits",
+    price: "Rs. 400",
+    condition: "Good",
+    category: "Books",
+  },
+  {
+    id: "17",
+    name: "The Alchemist",
+    price: "Rs. 250",
+    condition: "Fair",
+    category: "Books",
+  },
+
+  // Sports
+  {
+    id: "18",
+    name: "Cricket Bat",
+    price: "Rs. 2,000",
+    condition: "Good",
+    category: "Sports",
+  },
+  {
+    id: "19",
+    name: "Yoga Mat",
+    price: "Rs. 800",
+    condition: "Like New",
+    category: "Sports",
+  },
+  {
+    id: "20",
+    name: "Football",
+    price: "Rs. 600",
+    condition: "Good",
+    category: "Sports",
+  },
+  {
+    id: "21",
+    name: "Badminton Racket",
+    price: "Rs. 1,200",
+    condition: "Like New",
+    category: "Sports",
   },
 ];
 
 const recentSearches = ["iPhone", "Nike", "MacBook", "Chair"];
+
 const filters = [
-  "All",
-  "Electronics",
-  "Fashion",
-  "Furniture",
-  "Books",
-  "Sports",
+  { label: "All", icon: "grid-outline" },
+  { label: "Electronics", icon: "phone-portrait-outline" },
+  { label: "Fashion", icon: "shirt-outline" },
+  { label: "Furniture", icon: "bed-outline" },
+  { label: "Books", icon: "book-outline" },
+  { label: "Sports", icon: "football-outline" },
 ];
 
 export default function SearchScreen() {
@@ -106,6 +193,10 @@ export default function SearchScreen() {
     return matchesQuery && matchesFilter;
   });
 
+  const handleFilterPress = (label: string) => {
+    setActiveFilter(label);
+  };
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#FFF7ED" }}
@@ -115,16 +206,14 @@ export default function SearchScreen() {
       <View style={{ paddingHorizontal: 24, paddingTop: 16, paddingBottom: 8 }}>
         <Text
           style={{
-            fontSize: 29,
+            fontSize: 24,
             fontFamily: "Poppins_600SemiBold",
-            color: "#f97316",
-            marginBottom: 3,
+            color: "#1C1917",
+            marginBottom: 12,
           }}
         >
-          Search🔎
+          Search
         </Text>
-        {/* Divider */}
-        <View className="mx-22 border-b border-border dark:border-darkBorder mb-4" />
 
         {/* Search Input */}
         <View
@@ -167,29 +256,39 @@ export default function SearchScreen() {
           horizontal
           showsHorizontalScrollIndicator={false}
           data={filters}
-          keyExtractor={(item) => item}
+          keyExtractor={(item) => item.label}
           contentContainerStyle={{ paddingHorizontal: 24 }}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => setActiveFilter(item)}
+              onPress={() => handleFilterPress(item.label)}
               style={{
-                marginRight: 8,
-                paddingHorizontal: 16,
+                marginRight: 10,
+                paddingHorizontal: 14,
                 paddingVertical: 8,
                 borderRadius: 999,
                 borderWidth: 1,
-                backgroundColor: activeFilter === item ? "#F97316" : "#FFFFFF",
-                borderColor: activeFilter === item ? "#F97316" : "#FED7AA",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 6,
+                backgroundColor:
+                  activeFilter === item.label ? "#F97316" : "#FFFFFF",
+                borderColor:
+                  activeFilter === item.label ? "#F97316" : "#FED7AA",
               }}
             >
+              <Ionicons
+                name={item.icon as any}
+                size={14}
+                color={activeFilter === item.label ? "white" : "#F97316"}
+              />
               <Text
                 style={{
                   fontSize: 13,
                   fontFamily: "Inter_500Medium",
-                  color: activeFilter === item ? "white" : "#78716C",
+                  color: activeFilter === item.label ? "white" : "#78716C",
                 }}
               >
-                {item}
+                {item.label}
               </Text>
             </TouchableOpacity>
           )}
@@ -207,7 +306,7 @@ export default function SearchScreen() {
       />
 
       {/* Recent Searches */}
-      {query.length === 0 && (
+      {query.length === 0 && activeFilter === "All" && (
         <View style={{ paddingHorizontal: 24, marginBottom: 16 }}>
           <Text
             style={{
@@ -269,7 +368,8 @@ export default function SearchScreen() {
 
       {/* Product List */}
       <FlatList
-        data={query.length > 0 ? filteredProducts : allProducts}
+        data={filteredProducts}
+        extraData={activeFilter}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 80 }}
         showsVerticalScrollIndicator={false}
@@ -306,6 +406,7 @@ export default function SearchScreen() {
         }
         renderItem={({ item }) => (
           <TouchableOpacity
+            onPress={() => router.push(`/product/${item.id}`)}
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -317,7 +418,7 @@ export default function SearchScreen() {
               marginBottom: 12,
             }}
           >
-            {/* Image Placeholder */}
+            {/* Image */}
             <View
               style={{
                 width: 64,
@@ -331,10 +432,10 @@ export default function SearchScreen() {
                 borderColor: "#FED7AA",
               }}
             >
-              <Ionicons name="image-outline" size={24} color="#F97316" />
+              <Ionicons name="image-outline" size={24} color="#FED7AA" />
             </View>
 
-            {/* Product Info */}
+            {/* Info */}
             <View style={{ flex: 1 }}>
               <Text
                 style={{
@@ -346,16 +447,44 @@ export default function SearchScreen() {
               >
                 {item.name}
               </Text>
-              <Text
+              <View
                 style={{
-                  fontSize: 12,
-                  fontFamily: "Inter_400Regular",
-                  color: "#78716C",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 6,
                   marginBottom: 4,
                 }}
               >
-                {item.condition} • {item.category}
-              </Text>
+                <View
+                  style={{
+                    backgroundColor: "#FFF7ED",
+                    borderRadius: 999,
+                    paddingHorizontal: 8,
+                    paddingVertical: 2,
+                    borderWidth: 1,
+                    borderColor: "#FED7AA",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 11,
+                      fontFamily: "Inter_400Regular",
+                      color: "#F97316",
+                    }}
+                  >
+                    {item.category}
+                  </Text>
+                </View>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontFamily: "Inter_400Regular",
+                    color: "#78716C",
+                  }}
+                >
+                  {item.condition}
+                </Text>
+              </View>
               <Text
                 style={{
                   fontSize: 16,

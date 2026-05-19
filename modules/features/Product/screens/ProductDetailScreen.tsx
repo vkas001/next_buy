@@ -22,7 +22,7 @@ export default function ProductDetailScreen({
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#FFF7ED" }}
-      edges={["bottom"]}
+      edges={["bottom", "top"]}
     >
       {/* Scrollable Content */}
       <ScrollView

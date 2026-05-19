@@ -1,4 +1,9 @@
+import { router } from "expo-router";
 import { useState } from "react";
+import { Alert } from "react-native";
+
+import { useCart } from "@/modules/shared/context/CartContext";
+import { useWishlist } from "@/modules/shared/context/WishlistContext";
 import { Product } from "../types";
 
 // Dummy product - will be replaced by backend API later
@@ -30,33 +35,74 @@ const dummyProduct: Product = {
 };
 
 export function useProductDetail(productId: string) {
-  const [product, setProduct] = useState<Product>(dummyProduct);
-  const [isWishlisted, setIsWishlisted] = useState(product.isWishlisted);
-  const [isLoading, setIsLoading] = useState(false);
+  const { addToCart } = useCart();
+  const { isWishlisted, toggleWishlist } = useWishlist();
 
-  // Toggle wishlist state
-  const toggleWishlist = () => {
-    setIsWishlisted((prev) => !prev);
+  const [product] = useState<Product>(dummyProduct);
+  const [isLoading] = useState(false);
+
+  // Check wishlist state
+  const wishlisted = isWishlisted(product.id);
+
+  // Toggle wishlist
+  const handleToggleWishlist = () => {
+    toggleWishlist({
+      id: product.id,
+      name: product.name,
+      price: `Rs. ${product.price.toLocaleString()}`,
+      condition: product.condition,
+    });
   };
 
-  // Add to cart - backend will implement this
-  const addToCart = () => {
-    // TODO: backend will implement cart API call
-    console.log("Added to cart:", product.id);
+  // Add to cart
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      condition: product.condition,
+      category: product.category,
+      seller: product.seller.name,
+    });
+
+    Alert.alert(
+      "Added to Cart! 🛒",
+      `${product.name} has been added to your cart.`,
+      [
+        {
+          text: "Continue Shopping",
+          style: "cancel",
+        },
+        {
+          text: "View Cart",
+          onPress: () => router.push("/(tabs)/cart"),
+        },
+      ],
+    );
   };
 
-  // Buy now - backend will implement this
-  const buyNow = () => {
-    // TODO: backend will navigate to checkout
-    console.log("Buy now:", product.id);
+  // Buy now
+  const handleBuyNow = () => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      condition: product.condition,
+      category: product.category,
+      seller: product.seller.name,
+    });
+
+    router.push("/checkout");
   };
 
   return {
     product,
-    isWishlisted,
     isLoading,
-    toggleWishlist,
-    addToCart,
-    buyNow,
+    isWishlisted: wishlisted,
+    toggleWishlist: handleToggleWishlist,
+    addToCart: handleAddToCart,
+    buyNow: handleBuyNow,
   };
 }

@@ -9,18 +9,31 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useScreenRefresh } from "@/modules/features/Home/hooks/useScreenRefresh";
+import { useCart } from "@/modules/shared/context/CartContext";
+
 import CartItem from "../components/CartItem";
 import CartSummary from "../components/CartSummary";
 import EmptyCart from "../components/EmptyCart";
-import { useCart } from "../hooks/useCart";
 
 export default function CartScreen() {
-  const { cartItems, summary, removeItem, increaseQuantity, decreaseQuantity } =
-    useCart();
+  const {
+    cartItems = [],
+    summary,
+    removeItem,
+    increaseQuantity,
+    decreaseQuantity,
+  } = useCart();
 
   const { refreshing, onRefresh } = useScreenRefresh(async () => {
-    // TODO: backend will add refetch logic here
+    // TODO: backend refresh logic
   });
+
+  // ✅ SAFE FALLBACK (prevents crash if summary is undefined)
+  const safeSummary = {
+    subtotal: summary?.subtotal ?? 0,
+    shipping: summary?.shipping ?? 0,
+    total: summary?.total ?? 0,
+  };
 
   return (
     <SafeAreaView
@@ -29,9 +42,10 @@ export default function CartScreen() {
     >
       {/* Header */}
       <View className="flex-row items-center justify-between px-6 pt-4 pb-1">
-        <Text className="text-3xl font-heading text-orange-500 ">
-          My Cart🛒
+        <Text className="text-3xl font-heading text-orange-500">
+          My Cart 🛒
         </Text>
+
         {cartItems.length > 0 && (
           <View className="bg-primary rounded-full w-6 h-6 items-center justify-center">
             <Text className="text-white text-xs font-bodyMedium">
@@ -66,6 +80,7 @@ export default function CartScreen() {
               {cartItems.length} {cartItems.length === 1 ? "item" : "items"} in
               your cart
             </Text>
+
             {cartItems.map((item) => (
               <CartItem
                 key={item.id}
@@ -90,11 +105,12 @@ export default function CartScreen() {
             />
           </TouchableOpacity>
 
-          {/* Order Summary */}
+          {/* Order Summary (SAFE VERSION) */}
           <CartSummary
-            summary={summary}
+            summary={safeSummary}
             onCheckout={() => {
-              // TODO: navigate to checkout screen
+              // TODO: navigate to checkout
+              console.log("Checkout pressed");
             }}
           />
         </ScrollView>
