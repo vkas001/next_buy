@@ -19,7 +19,7 @@ export default function CartScreen() {
   const {
     cartItems = [],
     summary,
-    removeItem,
+    removeFromCart,
     increaseQuantity,
     decreaseQuantity,
   } = useCart();
@@ -28,7 +28,7 @@ export default function CartScreen() {
     // TODO: backend refresh logic
   });
 
-  // ✅ SAFE FALLBACK (prevents crash if summary is undefined)
+  //  SAFE FALLBACK (prevents crash if summary is undefined)
   const safeSummary = {
     subtotal: summary?.subtotal ?? 0,
     shipping: summary?.shipping ?? 0,
@@ -85,7 +85,7 @@ export default function CartScreen() {
               <CartItem
                 key={item.id}
                 item={item}
-                onRemove={removeItem}
+                onRemove={removeFromCart}
                 onIncrease={increaseQuantity}
                 onDecrease={decreaseQuantity}
               />

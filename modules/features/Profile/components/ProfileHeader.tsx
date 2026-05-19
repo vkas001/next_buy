@@ -26,7 +26,7 @@ export default function ProfileHeader({ onSettings }: ProfileHeaderProps) {
           color: "#F97316",
         }}
       >
-        Profile👤
+        Profile
       </Text>
 
       {/* Settings */}

@@ -208,7 +208,7 @@ export default function SearchScreen() {
           style={{
             fontSize: 24,
             fontFamily: "Poppins_600SemiBold",
-            color: "#1C1917",
+            color: "#F97316",
             marginBottom: 12,
           }}
         >
