@@ -35,7 +35,7 @@ export default function ProductImages({
         className="absolute top-4 left-4 w-10 h-10 bg-background dark:bg-darkBackground rounded-full items-center justify-center"
         style={{ opacity: 0.9 }}
       >
-        <Ionicons name="arrow-back" size={20} color="#F8FAFC" />
+        <Ionicons name="arrow-back" size={20} color="black" />
       </TouchableOpacity>
 
       {/* Wishlist Button */}
@@ -47,7 +47,7 @@ export default function ProductImages({
         <Ionicons
           name={isWishlisted ? "heart" : "heart-outline"}
           size={20}
-          color={isWishlisted ? "#EF4444" : "#F8FAFC"}
+          color={isWishlisted ? "#EF4444" : ""}
         />
       </TouchableOpacity>
 

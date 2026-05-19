@@ -1,3 +1,4 @@
+import { useCart } from "@/modules/shared/context/CartContext";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import {
@@ -16,6 +17,13 @@ import PaymentMethod from "../components/PaymentMethod";
 import { useCheckout } from "../hooks/useCheckout";
 
 export default function CheckoutScreen() {
+  const { cartItems, cartTotal, clearCart } = useCart();
+  const deliveryFee = 150;
+  const discount = cartItems.reduce((acc, item) => {
+    const original = item.product.originalPrice ?? item.product.price;
+    return acc + (original - item.product.price) * item.quantity;
+  }, 0);
+  const total = cartTotal + deliveryFee;
   const {
     addresses,
     paymentMethods,
@@ -28,6 +36,7 @@ export default function CheckoutScreen() {
   const handlePlaceOrder = async () => {
     const success = await placeOrder();
     if (success) {
+      clearCart();
       Alert.alert(
         "Order Placed! 🎉",
         "Your order has been placed successfully.",
@@ -122,10 +131,10 @@ export default function CheckoutScreen() {
 
         {/* Order Review */}
         <OrderReview
-          subtotal={56500}
-          deliveryFee={150}
-          discount={21500}
-          total={35150}
+          subtotal={cartTotal}
+          deliveryFee={deliveryFee}
+          discount={discount}
+          total={total}
         />
       </ScrollView>
 
@@ -171,7 +180,7 @@ export default function CheckoutScreen() {
                   color: "white",
                 }}
               >
-                Place Order — Rs. 35,150
+                Place Order — Rs. {total.toLocaleString()}
               </Text>
             </>
           )}

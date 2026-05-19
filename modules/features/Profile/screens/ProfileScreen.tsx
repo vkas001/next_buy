@@ -1,127 +1,3 @@
-// import { Ionicons } from "@expo/vector-icons";
-// import { router } from "expo-router";
-// import {
-//   RefreshControl,
-//   ScrollView,
-//   Text,
-//   TouchableOpacity,
-//   View,
-// } from "react-native";
-// import { SafeAreaView } from "react-native-safe-area-context";
-
-// import { useAuthState } from "@/modules/features/Auth/hooks/useAuthState";
-// import { useScreenRefresh } from "@/modules/features/Home/hooks/useScreenRefresh";
-// import GuestProfile from "../components/GuestProfile";
-// import ProfileCard from "../components/ProfileCard";
-// import ProfileHeader from "../components/ProfileHeader";
-// import ProfileMenu from "../components/ProfileMenu";
-
-// const menuSections = [
-//   {
-//     title: "Account",
-//     items: [
-//       { icon: "person-outline", label: "Edit Profile" },
-//       { icon: "shield-checkmark-outline", label: "Verify Identity" },
-//       { icon: "star-outline", label: "My Reviews" },
-//     ],
-//   },
-//   {
-//     title: "Shopping",
-//     items: [
-//       { icon: "bag-outline", label: "My Orders" },
-//       { icon: "heart-outline", label: "Wishlist" },
-//       { icon: "pricetag-outline", label: "My Listings" },
-//       { icon: "refresh-outline", label: "Refunds" },
-//     ],
-//   },
-//   {
-//     title: "Payments",
-//     items: [
-//       { icon: "card-outline", label: "Payment Methods" },
-//       { icon: "ticket-outline", label: "Vouchers & Discounts" },
-//       { icon: "wallet-outline", label: "Transaction History" },
-//     ],
-//   },
-//   {
-//     title: "Support",
-//     items: [
-//       { icon: "chatbubble-outline", label: "Chat Support" },
-//       { icon: "help-circle-outline", label: "FAQ" },
-//       { icon: "document-text-outline", label: "Terms & Privacy" },
-//     ],
-//   },
-//   {
-//     title: "Preferences",
-//     items: [
-//       { icon: "notifications-outline", label: "Notifications" },
-//       { icon: "moon-outline", label: "Dark Mode" },
-//       { icon: "language-outline", label: "Language" },
-//     ],
-//   },
-// ];
-
-// export default function ProfileScreen() {
-//   const { isLoggedIn, logout } = useAuthState();
-
-//   const { refreshing, onRefresh } = useScreenRefresh(async () => {
-//     // TODO: backend will add refetch logic here
-//   });
-
-//   // Show guest screen if not logged in
-//   if (!isLoggedIn) {
-//     return <GuestProfile />;
-//   }
-
-//   return (
-//     <SafeAreaView
-//       className="flex-1 bg-background dark:bg-darkBackground"
-//       edges={["top"]}
-//     >
-//       <ProfileHeader />
-//       <View className="mx-6 border-b border-border dark:border-darkBorder mb-2" />
-//       <ScrollView
-//         showsVerticalScrollIndicator={false}
-//         contentContainerStyle={{ paddingBottom: 80 }}
-//         refreshControl={
-//           <RefreshControl
-//             refreshing={refreshing}
-//             onRefresh={onRefresh}
-//             tintColor="#2563EB"
-//             colors={["#2563EB"]}
-//           />
-//         }
-//       >
-//         <ProfileCard />
-//         {menuSections.map((section) => (
-//           <ProfileMenu
-//             key={section.title}
-//             title={section.title}
-//             items={section.items}
-//           />
-//         ))}
-
-//         {/* Logout Button */}
-//         <View className="px-6 mb-6">
-//           <TouchableOpacity
-//             onPress={() => {
-//               logout();
-//               router.replace("/landing");
-//             }}
-//             className="w-full flex-row items-center justify-center bg-red-500 rounded-2xl py-4"
-//             style={{ gap: 8 }}
-//           >
-//             <Ionicons name="log-out-outline" size={20} color="white" />
-//             <Text className="text-base font-bodyMedium text-white">
-//               Log Out
-//             </Text>
-//           </TouchableOpacity>
-//         </View>
-//       </ScrollView>
-//     </SafeAreaView>
-//   );
-// }
-//THIS BELOW CODE IS FOR PROFILE SECTION SHOWING BEFORE LOGING IN//
-
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import {
@@ -134,59 +10,135 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useScreenRefresh } from "@/modules/features/Home/hooks/useScreenRefresh";
+import { useAuth } from "@/modules/shared/context/AuthContext";
+import { useWishlist } from "@/modules/shared/context/WishlistContext";
+
+import GuestProfile from "../components/GuestProfile";
 import ProfileCard from "../components/ProfileCard";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfileMenu from "../components/ProfileMenu";
 
-// Menu data - will be connected to backend later
-const menuSections = [
-  {
-    title: "Account",
-    items: [
-      { icon: "person-outline", label: "Edit Profile" },
-      { icon: "shield-checkmark-outline", label: "Verify Identity" },
-      { icon: "star-outline", label: "My Reviews" },
-    ],
-  },
-  {
-    title: "Shopping",
-    items: [
-      { icon: "bag-outline", label: "My Orders" },
-      { icon: "heart-outline", label: "Wishlist" },
-      { icon: "pricetag-outline", label: "My Listings" },
-      { icon: "refresh-outline", label: "Refunds" },
-    ],
-  },
-  {
-    title: "Payments",
-    items: [
-      { icon: "card-outline", label: "Payment Methods" },
-      { icon: "ticket-outline", label: "Vouchers & Discounts" },
-      { icon: "wallet-outline", label: "Transaction History" },
-    ],
-  },
-  {
-    title: "Support",
-    items: [
-      { icon: "chatbubble-outline", label: "Chat Support" },
-      { icon: "help-circle-outline", label: "FAQ" },
-      { icon: "document-text-outline", label: "Terms & Privacy" },
-    ],
-  },
-  {
-    title: "Preferences",
-    items: [
-      { icon: "notifications-outline", label: "Notifications" },
-      { icon: "moon-outline", label: "Dark Mode" },
-      { icon: "language-outline", label: "Language" },
-    ],
-  },
-];
-
 export default function ProfileScreen() {
+  const { user, isLoggedIn, logout } = useAuth();
+  const { wishlistCount } = useWishlist();
+
   const { refreshing, onRefresh } = useScreenRefresh(async () => {
-    // TODO: backend will add refetch logic here
+    // TODO: backend refresh
   });
+
+  // Show guest screen if not logged in
+  if (!isLoggedIn) {
+    return <GuestProfile />;
+  }
+
+  // ✅ MENU (updated with wishlistCount)
+  const menuSections = [
+    {
+      title: "Account",
+      items: [
+        {
+          icon: "person-outline",
+          label: "Edit Profile",
+          onPress: () => router.push("/profile/edit"),
+        },
+        {
+          icon: "shield-checkmark-outline",
+          label: "Verify Identity",
+          onPress: () => {},
+        },
+        {
+          icon: "star-outline",
+          label: "My Reviews",
+          onPress: () => {},
+        },
+      ],
+    },
+    {
+      title: "Shopping",
+      items: [
+        {
+          icon: "bag-outline",
+          label: "My Orders",
+          onPress: () => router.push("/orders"),
+        },
+        {
+          icon: "heart-outline",
+          label: `Wishlist (${wishlistCount})`, // ✅ UPDATED HERE
+          onPress: () => {},
+        },
+        {
+          icon: "pricetag-outline",
+          label: "My Listings",
+          onPress: () => {},
+        },
+        {
+          icon: "refresh-outline",
+          label: "Refunds",
+          onPress: () => {},
+        },
+      ],
+    },
+    {
+      title: "Payments",
+      items: [
+        {
+          icon: "card-outline",
+          label: "Payment Methods",
+          onPress: () => {},
+        },
+        {
+          icon: "ticket-outline",
+          label: "Vouchers & Discounts",
+          onPress: () => {},
+        },
+        {
+          icon: "wallet-outline",
+          label: "Transaction History",
+          onPress: () => {},
+        },
+      ],
+    },
+    {
+      title: "Support",
+      items: [
+        {
+          icon: "chatbubble-outline",
+          label: "Chat Support",
+          onPress: () => router.push("/chat"),
+        },
+        {
+          icon: "help-circle-outline",
+          label: "FAQ",
+          onPress: () => {},
+        },
+        {
+          icon: "document-text-outline",
+          label: "Terms & Privacy",
+          onPress: () => {},
+        },
+      ],
+    },
+    {
+      title: "Preferences",
+      items: [
+        {
+          icon: "notifications-outline",
+          label: "Notifications",
+          onPress: () => router.push("/notifications"),
+        },
+        {
+          icon: "settings-outline",
+          label: "Settings",
+          onPress: () => router.push("/settings"),
+        },
+        {
+          icon: "language-outline",
+          label: "Language",
+          onPress: () => {},
+        },
+      ],
+    },
+  ];
 
   return (
     <SafeAreaView
@@ -194,7 +146,7 @@ export default function ProfileScreen() {
       edges={["top"]}
     >
       {/* Header */}
-      <ProfileHeader />
+      <ProfileHeader onSettings={() => router.push("/settings")} />
 
       {/* Divider */}
       <View
@@ -214,28 +166,36 @@ export default function ProfileScreen() {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            tintColor="#2563EB"
-            colors={["#2563EB"]}
+            tintColor="#F97316"
+            colors={["#F97316"]}
           />
         }
       >
         {/* Profile Card */}
-        <ProfileCard />
+        <ProfileCard
+          name={user?.name}
+          email={user?.email}
+          avatar={user?.avatar}
+          location={user?.location}
+          wishlist={wishlistCount}
+        />
 
         {/* Menu Sections */}
         {menuSections.map((section) => (
           <ProfileMenu
             key={section.title}
             title={section.title}
-            // Pass the items belonging to this specific section
             items={section.items}
           />
         ))}
 
-        {/* Logout Button */}
+        {/* Logout */}
         <View style={{ paddingHorizontal: 24, marginBottom: 24 }}>
           <TouchableOpacity
-            onPress={() => router.replace("/landing")}
+            onPress={() => {
+              logout();
+              router.replace("/landing");
+            }}
             style={{
               flexDirection: "row",
               alignItems: "center",

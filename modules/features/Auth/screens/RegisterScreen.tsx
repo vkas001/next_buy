@@ -1,6 +1,8 @@
+import { useAuth } from "@/modules/shared/context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
+
 import {
   ScrollView,
   Text,
@@ -11,6 +13,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function RegisterScreen() {
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -206,8 +209,19 @@ export default function RegisterScreen() {
 
           {/* Create Account Button */}
           <TouchableOpacity
+            onPress={() => {
+              // TODO: backend will create account
+              login({
+                id: "1",
+                name: "John Doe",
+                email: "john@example.com",
+                avatar: "JD",
+                location: "Kathmandu, Nepal",
+              });
+              router.replace("/(tabs)");
+            }}
             style={{
-              backgroundColor: "#2563EB",
+              backgroundColor: "#F97316",
               borderRadius: 16,
               paddingVertical: 16,
               alignItems: "center",

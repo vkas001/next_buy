@@ -86,11 +86,11 @@ export default function Banner({
           <Text
             style={{
               color: "#F97316",
-              fontSize: 12,
+              fontSize: 16,
               fontFamily: "Inter_500Medium",
             }}
           >
-            Shop Now →
+            Shop Now
           </Text>
         </TouchableOpacity>
       </View>

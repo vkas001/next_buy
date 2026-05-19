@@ -1,21 +1,26 @@
+import { useWishlist } from "@/modules/shared/context/WishlistContext";
 import { Ionicons } from "@expo/vector-icons";
 import { Text, TouchableOpacity, View } from "react-native";
 
 interface ProductCardProps {
+  id: string;
   name: string;
   price: string;
   condition: string;
   onPress?: () => void;
-  onWishlist?: () => void;
 }
 
 export default function ProductCard({
+  id,
   name,
   price,
   condition,
   onPress,
-  onWishlist,
 }: ProductCardProps) {
+  const { isWishlisted, toggleWishlist } = useWishlist();
+
+  const wishlisted = isWishlisted(id);
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -42,7 +47,7 @@ export default function ProductCard({
         <Ionicons name="image-outline" size={32} color="#FED7AA" />
       </View>
 
-      {/* Info */}
+      {/* Content */}
       <View style={{ padding: 12 }}>
         {/* Name */}
         <Text
@@ -74,8 +79,22 @@ export default function ProductCard({
           >
             {price}
           </Text>
-          <TouchableOpacity onPress={onWishlist}>
-            <Ionicons name="heart-outline" size={18} color="#F97316" />
+
+          <TouchableOpacity
+            onPress={() =>
+              toggleWishlist({
+                id,
+                name,
+                price,
+                condition,
+              })
+            }
+          >
+            <Ionicons
+              name={wishlisted ? "heart" : "heart-outline"}
+              size={18}
+              color={wishlisted ? "#EF4444" : "#F97316"}
+            />
           </TouchableOpacity>
         </View>
 

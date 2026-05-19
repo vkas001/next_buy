@@ -1,9 +1,11 @@
+import { useCart } from "@/modules/shared/context/CartContext";
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function TabsLayout() {
   const insets = useSafeAreaInsets();
+  const { cartCount } = useCart();
 
   return (
     <Tabs
@@ -28,6 +30,7 @@ export default function TabsLayout() {
           fontSize: 11,
           fontFamily: "Inter_500Medium",
         },
+        animation: "shift",
       }}
     >
       <Tabs.Screen
@@ -52,6 +55,8 @@ export default function TabsLayout() {
         name="cart"
         options={{
           title: "Cart",
+          tabBarBadge: cartCount > 0 ? cartCount : undefined,
+          tabBarBadgeStyle: { backgroundColor: "#F97316" },
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="cart-outline" size={size} color={color} />
           ),

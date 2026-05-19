@@ -120,29 +120,38 @@ export default function HomeScreen() {
             tag="LIMITED TIME OFFER"
             title="Up to 50% Off"
             subtitle="On second-hand electronics"
+            onPress={() => router.push("/offer")}
           />
         </View>
 
         {/* Categories */}
-        <View style={{ marginBottom: 24 }}>
-          <View style={{ paddingHorizontal: 24 }}>
-            <SectionHeader title="Categories" />
-          </View>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: 24 }}
-          >
+        <View style={{ paddingHorizontal: 24 }}>
+          <SectionHeader
+            title="Categories"
+            onSeeAll={() => router.push("/products/all?type=recent")}
+          />
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {categories.map((cat) => (
-              <CategoryCard key={cat.id} name={cat.name} icon={cat.icon} />
+              <CategoryCard
+                key={cat.id}
+                name={cat.name}
+                icon={cat.icon}
+                onPress={() =>
+                  router.push(`/category/${cat.id}?name=${cat.name}`)
+                }
+              />
             ))}
           </ScrollView>
         </View>
 
         {/* Featured Deals */}
         <View style={{ marginBottom: 24 }}>
+          {/* Featured Deals */}
           <View style={{ paddingHorizontal: 24 }}>
-            <SectionHeader title="Featured Deals" />
+            <SectionHeader
+              title="Featured Deals"
+              onSeeAll={() => router.push("/products/all?type=featured")}
+            />
           </View>
           <ScrollView
             horizontal
@@ -165,7 +174,10 @@ export default function HomeScreen() {
 
         {/* Recent Listings */}
         <View style={{ paddingHorizontal: 24, marginBottom: 24 }}>
-          <SectionHeader title="Recent Listings" />
+          <SectionHeader
+            title="Recent Listings"
+            onSeeAll={() => router.push("/products/all?type=recent")}
+          />
           <View
             style={{
               flexDirection: "row",
