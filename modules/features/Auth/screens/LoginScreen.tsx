@@ -1,8 +1,8 @@
-import { useAuth } from "@/modules/shared/context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
+  Alert,
   ScrollView,
   Text,
   TextInput,
@@ -10,10 +10,26 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { loginUser } from "../services/authService";
 
 export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
-  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      return alert("Please enter both email and password.");
+    }
+    try {
+      await loginUser(email, password);
+      Alert.alert("Success", "Welcome back!");
+      // Switch navigation state to your home screen here
+    } catch (error: any) {
+      Alert.alert("Authentication Failed", error.message);
+    }
+  };
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#FFF7ED" }}
@@ -89,6 +105,8 @@ export default function LoginScreen() {
               placeholderTextColor="#64748B"
               keyboardType="email-address"
               autoCapitalize="none"
+              value={email}
+              onChangeText={setEmail}
             />
           </View>
 
@@ -126,6 +144,8 @@ export default function LoginScreen() {
               placeholder="Enter your password"
               placeholderTextColor="#64748B"
               secureTextEntry={!showPassword}
+              value={password}
+              onChangeText={setPassword}
             />
             <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
               <Ionicons
@@ -153,19 +173,7 @@ export default function LoginScreen() {
 
           {/* Sign in Button */}
           <TouchableOpacity
-            onPress={() => {
-              // TODO: backend will validate credentials
-              // Temporary dummy login
-              login({
-                id: "1",
-                name: "John Doe",
-                email: "john@example.com",
-                avatar: "JD",
-                location: "Kathmandu, Nepal",
-              });
-
-              router.replace("/(tabs)");
-            }}
+            onPress={handleLogin}
             style={{
               backgroundColor: "#F97316",
               borderRadius: 16,
