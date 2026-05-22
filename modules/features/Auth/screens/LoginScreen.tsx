@@ -18,13 +18,17 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    if (!email || !password) {
-      return alert("Please enter both email and password.");
+    if (!email.trim() || !password.trim()) {
+      return Alert.alert("Please enter your email and password.");
+    }
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      return Alert.alert("Validation Error", "Please enter a valid email format (e.g., user@example.com).");
     }
     try {
-      await loginUser(email, password);
-      Alert.alert("Success", "Welcome back!");
-      // Switch navigation state to your home screen here
+      await loginUser(email.trim(), password.trim());
+      Alert.alert("Success", "Login successful!");
+      router.replace("/(tabs)");
     } catch (error: any) {
       Alert.alert("Authentication Failed", error.message);
     }

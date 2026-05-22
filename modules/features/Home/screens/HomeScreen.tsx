@@ -188,6 +188,7 @@ export default function HomeScreen() {
             {recentProducts.map((product) => (
               <ProductCard
                 key={product.id}
+                id={product.id}
                 name={product.name}
                 price={product.price}
                 condition={product.condition}
