@@ -1,21 +1,46 @@
-import { useAuth } from "@/modules/shared/context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
-
 import {
+  Alert,
   ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
+import { signUpUser } from "../services/authService";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function RegisterScreen() {
-  const { login } = useAuth();
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleSignUp = async () => {
+    if (!fullName || !email || !password || !confirmPassword) {
+      return Alert.alert("Error", "Please fill out all fields.");
+    }
+
+    if (password.length < 8) {
+      return Alert.alert("Error", "Password must be at least 8 characters long.");
+    }
+
+    if (password !== confirmPassword) {
+      return Alert.alert("Error", "Passwords do not match. Please verify your entry.");
+    }
+
+    try {
+      await signUpUser(email, password, fullName);
+      Alert.alert("Success", "Account created and logged in!");
+      // Route navigation to home screen here...
+    } catch (error: any) {
+      Alert.alert("Registration Failed", error.message);
+    }
+  };
+
 
   return (
     <SafeAreaView
@@ -194,13 +219,13 @@ export default function RegisterScreen() {
               }}
               placeholder="Repeat your password"
               placeholderTextColor="#64748B"
-              secureTextEntry={!showConfirmPassword}
+              secureTextEntry={!showPassword}
             />
             <TouchableOpacity
-              onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+              onPress={() => setShowPassword(!showPassword)}
             >
               <Ionicons
-                name={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
+                name={showPassword ? "eye-off-outline" : "eye-outline"}
                 size={20}
                 color="#64748B"
               />
@@ -211,7 +236,7 @@ export default function RegisterScreen() {
           <TouchableOpacity
             onPress={() => {
               // TODO: backend will create account
-              login({
+              ({
                 id: "1",
                 name: "John Doe",
                 email: "john@example.com",

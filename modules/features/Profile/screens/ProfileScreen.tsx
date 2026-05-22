@@ -10,28 +10,62 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useScreenRefresh } from "@/modules/features/Home/hooks/useScreenRefresh";
-import { useAuth } from "@/modules/shared/context/AuthContext";
 import { useWishlist } from "@/modules/shared/context/WishlistContext";
-
+import { useEffect, useState } from "react";
+import { getCurrentUser, logoutUser } from "../../../features/Auth/services/authService";
 import GuestProfile from "../components/GuestProfile";
 import ProfileCard from "../components/ProfileCard";
 import ProfileHeader from "../components/ProfileHeader";
 import ProfileMenu from "../components/ProfileMenu";
 
 export default function ProfileScreen() {
-  const { user, isLoggedIn, logout } = useAuth();
   const { wishlistCount } = useWishlist();
+  const [user, setUser] = useState<any>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
 
   const { refreshing, onRefresh } = useScreenRefresh(async () => {
     // TODO: backend refresh
   });
+
+  const handleLogout = async () => {
+    try {
+      setIsLoading(true);
+      await logoutUser();
+      setIsLoggedIn(false);
+      setUser(null);
+      router.replace("/landing");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    async function checkSession() {
+      const currentUser = await getCurrentUser();
+
+      if (currentUser) {
+        setUser(currentUser);
+        setIsLoggedIn(true);
+      } else {
+        setUser(null);
+        setIsLoggedIn(false);
+      }
+      setIsLoading(false);
+    }
+
+    checkSession();
+  }, []);
 
   // Show guest screen if not logged in
   if (!isLoggedIn) {
     return <GuestProfile />;
   }
 
-  // ✅ MENU (updated with wishlistCount)
+  //  MENU (updated with wishlistCount)
   const menuSections = [
     {
       title: "Account",
@@ -44,12 +78,12 @@ export default function ProfileScreen() {
         {
           icon: "shield-checkmark-outline",
           label: "Verify Identity",
-          onPress: () => {},
+          onPress: () => { },
         },
         {
           icon: "star-outline",
           label: "My Reviews",
-          onPress: () => {},
+          onPress: () => { },
         },
       ],
     },
@@ -63,18 +97,18 @@ export default function ProfileScreen() {
         },
         {
           icon: "heart-outline",
-          label: `Wishlist (${wishlistCount})`, // ✅ UPDATED HERE
-          onPress: () => {},
+          label: `Wishlist (${wishlistCount})`, // UPDATED HERE
+          onPress: () => { },
         },
         {
           icon: "pricetag-outline",
           label: "My Listings",
-          onPress: () => {},
+          onPress: () => { },
         },
         {
           icon: "refresh-outline",
           label: "Refunds",
-          onPress: () => {},
+          onPress: () => { },
         },
       ],
     },
@@ -84,17 +118,17 @@ export default function ProfileScreen() {
         {
           icon: "card-outline",
           label: "Payment Methods",
-          onPress: () => {},
+          onPress: () => { },
         },
         {
           icon: "ticket-outline",
           label: "Vouchers & Discounts",
-          onPress: () => {},
+          onPress: () => { },
         },
         {
           icon: "wallet-outline",
           label: "Transaction History",
-          onPress: () => {},
+          onPress: () => { },
         },
       ],
     },
@@ -109,12 +143,12 @@ export default function ProfileScreen() {
         {
           icon: "help-circle-outline",
           label: "FAQ",
-          onPress: () => {},
+          onPress: () => { },
         },
         {
           icon: "document-text-outline",
           label: "Terms & Privacy",
-          onPress: () => {},
+          onPress: () => { },
         },
       ],
     },
@@ -134,7 +168,7 @@ export default function ProfileScreen() {
         {
           icon: "language-outline",
           label: "Language",
-          onPress: () => {},
+          onPress: () => { },
         },
       ],
     },
@@ -192,10 +226,7 @@ export default function ProfileScreen() {
         {/* Logout */}
         <View style={{ paddingHorizontal: 24, marginBottom: 24 }}>
           <TouchableOpacity
-            onPress={() => {
-              logout();
-              router.replace("/landing");
-            }}
+            onPress={handleLogout}
             style={{
               flexDirection: "row",
               alignItems: "center",
