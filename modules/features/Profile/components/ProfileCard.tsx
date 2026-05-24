@@ -15,13 +15,13 @@ interface ProfileCardProps {
 }
 
 export default function ProfileCard({
-  name = "John Doe",
-  email = "john@example.com",
-  location = "Kathmandu, Nepal",
-  avatar = "JD",
+  name = "",
+  email = "",
+  location = "",
+  avatar = "",
   listings = 12,
   orders = 48,
-  rating = "4.8 ⭐",
+  rating = "4.8 ",
   wishlist = 5,
   onEdit,
 }: ProfileCardProps) {
@@ -60,7 +60,12 @@ export default function ProfileCard({
               color: "white",
             }}
           >
-            {avatar}
+            {name
+              .split(" ")
+              .slice(0, 2)
+              .map((word) => word[0])
+              .join("")
+              .toUpperCase()}
           </Text>
         </View>
 

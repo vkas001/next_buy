@@ -3,14 +3,20 @@ import { router } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 
 interface HomeHeaderProps {
-  username?: string;
+  userName?: string;
   onAvatar?: () => void;
 }
 
 export default function HomeHeader({
-  username = "JD",
+  userName = "",
   onAvatar,
 }: HomeHeaderProps) {
+  const userInitials = userName
+    .split(" ")
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
   return (
     <View style={{ paddingHorizontal: 24, paddingTop: 14, paddingBottom: 8 }}>
       {/* Top Row */}
@@ -113,7 +119,7 @@ export default function HomeHeader({
                 fontSize: 14,
               }}
             >
-              {username}
+              {userInitials}
             </Text>
           </TouchableOpacity>
         </View>

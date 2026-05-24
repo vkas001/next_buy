@@ -9,8 +9,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { signUpUser } from "../services/authService";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { signUpUser } from "../services/authService";
 
 export default function RegisterScreen() {
   const [fullName, setFullName] = useState("");
@@ -35,7 +35,7 @@ export default function RegisterScreen() {
     try {
       await signUpUser(email, password, fullName);
       Alert.alert("Success", "Account created and logged in!");
-      // Route navigation to home screen here...
+      router.replace("/(tabs)");
     } catch (error: any) {
       Alert.alert("Registration Failed", error.message);
     }
@@ -104,6 +104,8 @@ export default function RegisterScreen() {
               placeholder="Your Name"
               placeholderTextColor="#64748B"
               autoCapitalize="words"
+              value={fullName}
+              onChangeText={setFullName}
             />
           </View>
 
@@ -139,6 +141,8 @@ export default function RegisterScreen() {
               placeholderTextColor="#64748B"
               keyboardType="email-address"
               autoCapitalize="none"
+              value={email}
+              onChangeText={setEmail}
             />
           </View>
 
@@ -176,6 +180,8 @@ export default function RegisterScreen() {
               placeholder="Create a password"
               placeholderTextColor="#64748B"
               secureTextEntry={!showPassword}
+              value={password}
+              onChangeText={setPassword}
             />
             <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
               <Ionicons
@@ -220,6 +226,8 @@ export default function RegisterScreen() {
               placeholder="Repeat your password"
               placeholderTextColor="#64748B"
               secureTextEntry={!showPassword}
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
             />
             <TouchableOpacity
               onPress={() => setShowPassword(!showPassword)}
@@ -234,17 +242,7 @@ export default function RegisterScreen() {
 
           {/* Create Account Button */}
           <TouchableOpacity
-            onPress={() => {
-              // TODO: backend will create account
-              ({
-                id: "1",
-                name: "John Doe",
-                email: "john@example.com",
-                avatar: "JD",
-                location: "Kathmandu, Nepal",
-              });
-              router.replace("/(tabs)");
-            }}
+            onPress={handleSignUp}
             style={{
               backgroundColor: "#F97316",
               borderRadius: 16,
