@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { useEffect, useState } from "react";
 import {
   RefreshControl,
   ScrollView,
@@ -8,6 +9,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { getCurrentUser } from "@/modules/features/Auth/services/authService";
 import LoadingScreen from "@/modules/shared/components/LoadingScreen";
 import SectionHeader from "@/modules/shared/components/SectionHeader";
 import Banner from "../components/Banner";
@@ -78,10 +80,21 @@ const recentProducts = [
 ];
 
 export default function HomeScreen() {
+  const [userName, setUserName] = useState<string | undefined>(undefined);
   const { isLoading, refetchAll } = useHomeScreen();
   const { refreshing, onRefresh } = useScreenRefresh(async () => {
     await refetchAll();
   });
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await getCurrentUser();
+      if (user?.name) {
+        setUserName(user.name);
+      }
+    };
+    fetchUser();
+  }, []);
 
   return (
     <SafeAreaView
@@ -89,7 +102,7 @@ export default function HomeScreen() {
       edges={["top"]}
     >
       {/* Header */}
-      <HomeHeader />
+      <HomeHeader userName={userName} />
 
       {/* Divider */}
       <View

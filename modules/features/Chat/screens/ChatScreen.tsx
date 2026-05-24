@@ -21,6 +21,14 @@ export default function ChatScreen({ conversationId }: ChatScreenProps) {
   const { messages, inputText, setInputText, sendMessage } =
     useChatMessages(conversationId);
 
+  const participantName = "Aarav Sharma";
+  const participantInitials = participantName
+    .split(" ")
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#FFF7ED" }}
@@ -64,7 +72,7 @@ export default function ChatScreen({ conversationId }: ChatScreenProps) {
                 color: "white",
               }}
             >
-              AS
+              {participantInitials}
             </Text>
           </View>
           <View style={{ flex: 1 }}>
@@ -75,7 +83,7 @@ export default function ChatScreen({ conversationId }: ChatScreenProps) {
                 color: "#1C1917",
               }}
             >
-              Aarav Sharma
+              {participantName}
             </Text>
             <Text
               style={{
