@@ -9,67 +9,56 @@ import FeaturedCard from "../components/FeaturedCard";
 const offerProducts = [
   {
     id: "1",
-    name: "iPhone 13 Pro",
-    price: "Rs. 45,000",
-    originalPrice: "Rs. 60,000",
-    condition: "Good",
-    discount: "25%",
-  },
-  {
-    id: "2",
-    name: "Nike Air Max",
-    price: "Rs. 3,500",
-    originalPrice: "Rs. 6,000",
-    condition: "Like New",
-    discount: "42%",
-  },
-  {
-    id: "3",
-    name: "Sony Headphones",
-    price: "Rs. 8,000",
-    originalPrice: "Rs. 12,000",
-    condition: "Good",
-    discount: "33%",
-  },
-  {
-    id: "4",
-    name: "MacBook Air M1",
-    price: "Rs. 85,000",
-    originalPrice: "Rs. 110,000",
-    condition: "Like New",
-    discount: "23%",
-  },
-  {
-    id: "5",
-    name: "Canon DSLR",
+    name: "Canon DSLR Camera",
     price: "Rs. 25,000",
     originalPrice: "Rs. 35,000",
     condition: "Good",
     discount: "29%",
+    image: require("@/assets/images/recents/dslr.jpg"),
   },
   {
-    id: "6",
+    id: "2",
     name: "Gaming Chair",
     price: "Rs. 12,000",
     originalPrice: "Rs. 18,000",
     condition: "Like New",
     discount: "33%",
+    image: require("@/assets/images/recents/chair.jpg")
   },
   {
-    id: "7",
+    id: "3",
     name: "Smart Watch",
     price: "Rs. 5,500",
-    originalPrice: "Rs. 8,000",
+    originalPrice: "Rs. 8,500",
     condition: "Fair",
-    discount: "31%",
+    discount: "35%",
+    image: require("@/assets/images/recents/watch.jpg")
   },
   {
-    id: "8",
+    id: "4",
     name: "Leather Jacket",
     price: "Rs. 2,800",
-    originalPrice: "Rs. 5,000",
+    originalPrice: "Rs. 4,200",
     condition: "Good",
-    discount: "44%",
+    discount: "33%",
+  },
+  {
+    id: "5",
+    name: "Study Table",
+    price: "Rs. 4,500",
+    originalPrice: "Rs. 6,500",
+    condition: "Good",
+    discount: "31%",
+    image: require("@/assets/images/recents/table.jpg")
+  },
+  {
+    id: "6",
+    name: "Guitar",
+    price: "Rs. 7,000",
+    originalPrice: "Rs. 10,000",
+    condition: "Like New",
+    discount: "30%",
+    image: require("@/assets/images/recents/guitar.jpg")
   },
 ];
 
@@ -165,7 +154,7 @@ export default function OfferScreen() {
             color: "#1C1917",
           }}
         >
-          Limited Time Offer 🔥
+          Limited Time Offer 
         </Text>
       </View>
 
@@ -203,7 +192,7 @@ export default function OfferScreen() {
               marginBottom: 20,
             }}
           >
-            Up to 50% Off 🎉
+            Up to 50% Off 
           </Text>
 
           {/* Countdown Timer */}
@@ -274,6 +263,7 @@ export default function OfferScreen() {
                   originalPrice={product.originalPrice}
                   condition={product.condition}
                   discount={product.discount}
+                  image={product.image}
                   onPress={() => router.push(`/product/${product.id}`)}
                 />
               </View>

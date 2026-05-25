@@ -24,17 +24,6 @@ export default function SectionHeader({ title, onSeeAll }: SectionHeaderProps) {
       >
         {title}
       </Text>
-      <TouchableOpacity onPress={onSeeAll}>
-        <Text
-          style={{
-            fontSize: 13,
-            fontFamily: "Inter_400Regular",
-            color: "#F97316",
-          }}
-        >
-          See all
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 }

@@ -1,12 +1,13 @@
 import { useWishlist } from "@/modules/shared/context/WishlistContext";
 import { Ionicons } from "@expo/vector-icons";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, Image } from "react-native";
 
 interface ProductCardProps {
   id: string;
   name: string;
   price: string;
   condition: string;
+  image: any;
   onPress?: () => void;
 }
 
@@ -15,6 +16,7 @@ export default function ProductCard({
   name,
   price,
   condition,
+  image,
   onPress,
 }: ProductCardProps) {
   const { isWishlisted, toggleWishlist } = useWishlist();
@@ -35,17 +37,25 @@ export default function ProductCard({
       }}
     >
       {/* Image Placeholder */}
-      <View
-        style={{
-          width: "100%",
-          height: 112,
-          backgroundColor: "#FFF7ED",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Ionicons name="image-outline" size={32} color="#FED7AA" />
-      </View>
+      {image ? (
+        <Image
+          source={image}
+          style={{ width: "100%", height: 112 }}
+          resizeMode="contain"
+        />
+      ) : (
+        <View
+          style={{
+            width: "100%",
+            height: 112,
+            backgroundColor: "#FFF7ED",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Ionicons name="image-outline" size={32} color="#FED7AA" />
+        </View>
+      )}
 
       {/* Content */}
       <View style={{ padding: 12 }}>

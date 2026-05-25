@@ -5,7 +5,51 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FeaturedCard from "../components/FeaturedCard";
 import ProductCard from "../components/ProductCard";
 
-const allProducts = [
+const recentProducts = [
+  {
+    id: "1",
+    name: "Canon DSLR Camera",
+    price: "Rs. 25,000",
+    condition: "Good",
+    image: require("@/assets/images/recents/dslr.jpg"),
+  },
+  {
+    id: "2",
+    name: "Gaming Chair",
+    price: "Rs. 12,000",
+    condition: "Like New",
+    image: require("@/assets/images/recents/chair.jpg")
+  },
+  {
+    id: "3",
+    name: "Smart Watch",
+    price: "Rs. 5,500",
+    condition: "Fair",
+    image: require("@/assets/images/recents/watch.jpg")
+  },
+  {
+    id: "4",
+    name: "Leather Jacket",
+    price: "Rs. 2,800",
+    condition: "Good"
+  },
+  {
+    id: "5",
+    name: "Study Table",
+    price: "Rs. 4,500",
+    condition: "Good",
+    image: require("@/assets/images/recents/table.jpg")
+  },
+  {
+    id: "6",
+    name: "Guitar",
+    price: "Rs. 7,000",
+    condition: "Like New",
+    image: require("@/assets/images/recents/guitar.jpg")
+  },
+];
+
+const featuredProducts = [
   {
     id: "1",
     name: "iPhone 13 Pro",
@@ -13,7 +57,7 @@ const allProducts = [
     originalPrice: "Rs. 60,000",
     condition: "Good",
     discount: "25%",
-    category: "Electronics",
+    image: require("@/assets/images/featured/iphone13.webp"),
   },
   {
     id: "2",
@@ -22,7 +66,7 @@ const allProducts = [
     originalPrice: "Rs. 6,000",
     condition: "Like New",
     discount: "42%",
-    category: "Fashion",
+    image: require("@/assets/images/featured/nikey.jpg"),
   },
   {
     id: "3",
@@ -31,7 +75,7 @@ const allProducts = [
     originalPrice: "Rs. 12,000",
     condition: "Good",
     discount: "33%",
-    category: "Electronics",
+    image: require("@/assets/images/featured/sony.jpg"),
   },
   {
     id: "4",
@@ -40,50 +84,16 @@ const allProducts = [
     originalPrice: "Rs. 110,000",
     condition: "Like New",
     discount: "23%",
-    category: "Electronics",
-  },
-  {
-    id: "5",
-    name: "Canon DSLR Camera",
-    price: "Rs. 25,000",
-    originalPrice: "Rs. 30,000",
-    condition: "Good",
-    discount: "17%",
-    category: "Electronics",
-  },
-  {
-    id: "6",
-    name: "Gaming Chair",
-    price: "Rs. 12,000",
-    originalPrice: "Rs. 18,000",
-    condition: "Like New",
-    discount: "33%",
-    category: "Furniture",
-  },
-  {
-    id: "7",
-    name: "Smart Watch",
-    price: "Rs. 5,500",
-    originalPrice: "Rs. 8,000",
-    condition: "Fair",
-    discount: "31%",
-    category: "Electronics",
-  },
-  {
-    id: "8",
-    name: "Leather Jacket",
-    price: "Rs. 2,800",
-    originalPrice: "Rs. 5,000",
-    condition: "Good",
-    discount: "44%",
-    category: "Fashion",
+    image: require("@/assets/images/featured/macbook.png"),
   },
 ];
 
 export default function AllProductsScreen() {
   const { type } = useLocalSearchParams<{ type: string }>();
 
-  const title = type === "featured" ? "Featured Deals" : "Recent Listings";
+  const isFeatured = type === "featured";
+  const title = isFeatured ? "Featured Deals" : "Recent Listings";
+  const itemCount = isFeatured ? featuredProducts.length : recentProducts.length;
 
   return (
     <SafeAreaView
@@ -123,7 +133,7 @@ export default function AllProductsScreen() {
             color: "#78716C",
           }}
         >
-          {allProducts.length} items
+          {itemCount} items
         </Text>
       </View>
 
@@ -131,7 +141,7 @@ export default function AllProductsScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ padding: 24, paddingBottom: 40 }}
       >
-        {type === "featured" ? (
+        {isFeatured ? (
           // Featured — 2 column grid using FeaturedCard
           <View
             style={{
@@ -141,7 +151,7 @@ export default function AllProductsScreen() {
               gap: 12,
             }}
           >
-            {allProducts.map((product) => (
+            {featuredProducts.map((product) => (
               <FeaturedCard
                 key={product.id}
                 name={product.name}
@@ -149,6 +159,7 @@ export default function AllProductsScreen() {
                 originalPrice={product.originalPrice}
                 condition={product.condition}
                 discount={product.discount}
+                image={product.image}
                 onPress={() => router.push(`/product/${product.id}`)}
               />
             ))}
@@ -162,12 +173,14 @@ export default function AllProductsScreen() {
               justifyContent: "space-between",
             }}
           >
-            {allProducts.map((product) => (
+            {recentProducts.map((product) => (
               <ProductCard
                 key={product.id}
+                id={product.id}
                 name={product.name}
                 price={product.price}
                 condition={product.condition}
+                image={product.image}
                 onPress={() => router.push(`/product/${product.id}`)}
               />
             ))}
