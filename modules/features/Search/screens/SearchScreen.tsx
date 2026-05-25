@@ -307,21 +307,26 @@ export default function SearchScreen() {
 
       {/* Recent Searches */}
       {query.length === 0 && activeFilter === "All" && (
-        <View style={{ paddingHorizontal: 24, marginBottom: 16 }}>
+        <View style={{ marginBottom: 16 }}>
           <Text
             style={{
               fontSize: 13,
               fontFamily: "Inter_500Medium",
               color: "#78716C",
               marginBottom: 12,
+              paddingHorizontal: 24,
             }}
           >
             Recent Searches
           </Text>
-          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
-            {recentSearches.map((search) => (
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={recentSearches}
+            keyExtractor={(item) => item}
+            contentContainerStyle={{ paddingHorizontal: 24 }}
+            renderItem={({ item: search }) => (
               <TouchableOpacity
-                key={search}
                 onPress={() => setQuery(search)}
                 style={{
                   flexDirection: "row",
@@ -332,6 +337,7 @@ export default function SearchScreen() {
                   borderRadius: 999,
                   paddingHorizontal: 12,
                   paddingVertical: 8,
+                  marginRight: 8,
                 }}
               >
                 <Ionicons name="time-outline" size={14} color="#F97316" />
@@ -346,8 +352,8 @@ export default function SearchScreen() {
                   {search}
                 </Text>
               </TouchableOpacity>
-            ))}
-          </View>
+            )}
+          />
         </View>
       )}
 
