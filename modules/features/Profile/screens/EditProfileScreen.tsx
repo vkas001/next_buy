@@ -1,24 +1,124 @@
 import { Ionicons } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
+  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { getCurrentUser } from "../../../features/Auth/services/authService";
+
+import { getUserProfilePictureUrl, uploadUserProfilePicture } from "../services/profileService";
+
+import { APPWRITE_CONFIG, database } from '@/shared/services/appwrite';
+
 export default function EditProfileScreen() {
-  const [name, setName] = useState("John Doe");
-  const [email, setEmail] = useState("john@example.com");
-  const [phone, setPhone] = useState("9800000000");
-  const [location, setLocation] = useState("Kathmandu, Nepal");
+  const [userId, setUserId] = useState<string>("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [location, setLocation] = useState("");
   const [bio, setBio] = useState("");
 
+  const [imagePickerResponse, setImagePickerResponse] = useState<any>(null);
+  const [profilePreviewUrl, setProfilePreviewUrl] = useState<string | null>(null);
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    const loadUserData = async () => {
+      try {
+        setIsLoading(true);
+        const user = await getCurrentUser();
+        if (user) {
+          setUserId(user.$id);
+          setName(user.name || "");
+          setEmail(user.email || "");
+          setPhone(user.phone || "");
+
+          // Fetch the document using your APPWRITE_CONFIG object
+          try {
+            const userDoc: any = await database.getDocument(
+              APPWRITE_CONFIG.databaseId,
+              APPWRITE_CONFIG.collectionId,
+              user.$id
+            );
+
+            if (userDoc && userDoc.profilePicId) {
+              // Fetch preview URL from your profile service
+              const url = await getUserProfilePictureUrl(userDoc.profilePicId);
+              setProfilePreviewUrl(url);
+            }
+          } catch (docError) {
+            console.log("No profile record found in Appwrite DB yet.");
+          }
+        }
+      } catch (error) {
+        console.error("Failed to load user data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadUserData();
+  }, []);
+
+  const handlePickImage = async () => {
+    try {
+      // Request permissions first
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert("Permission Denied", "You need to grant permission to access your photo library.");
+        return;
+      }
+
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 0.8,
+        allowsEditing: true,
+        aspect: [1, 1],
+      });
+
+      if (result.canceled) return;
+
+      if (result.assets && result.assets.length > 0) {
+        setImagePickerResponse(result);
+        setProfilePreviewUrl(result.assets[0].uri || null); // Instant local preview
+      }
+    } catch (error: any) {
+      Alert.alert("Error", error?.message || "Failed to pick image");
+    }
+  };
+
+  const handleSaveProfile = async () => {
+    if (!userId) return;
+
+    try {
+      setIsSaving(true);
+
+      // Trigger your profile service file upload logic
+      if (imagePickerResponse) {
+        await uploadUserProfilePicture(userId, imagePickerResponse);
+      }
+
+      Alert.alert("Success", "Profile updated successfully!");
+      router.back();
+    } catch (error: any) {
+      Alert.alert("Save Error", error.message || "Something went wrong.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
   const fields = [
     {
       label: "Full Name",
@@ -82,16 +182,14 @@ export default function EditProfileScreen() {
         >
           Edit Profile
         </Text>
-        <TouchableOpacity>
-          <Text
-            style={{
-              fontSize: 14,
-              fontFamily: "Inter_500Medium",
-              color: "#F97316",
-            }}
-          >
-            Save
-          </Text>
+        <TouchableOpacity onPress={handleSaveProfile} disabled={isSaving}>
+          {isSaving ? (
+            <ActivityIndicator size="small" color="#F97316" />
+          ) : (
+            <Text style={{ fontSize: 14, fontFamily: "Inter_500Medium", color: "#F97316" }}>
+              Save
+            </Text>
+          )}
         </TouchableOpacity>
       </View>
 
@@ -126,10 +224,16 @@ export default function EditProfileScreen() {
                   color: "white",
                 }}
               >
-                JD
+                {name
+                  .split(" ")
+                  .slice(0, 2)
+                  .map((word) => word[0])
+                  .join("")
+                  .toUpperCase() || "?"}
               </Text>
             </View>
             <TouchableOpacity
+              onPress={handlePickImage}
               style={{
                 flexDirection: "row",
                 alignItems: "center",
@@ -143,13 +247,7 @@ export default function EditProfileScreen() {
               }}
             >
               <Ionicons name="camera-outline" size={16} color="#F97316" />
-              <Text
-                style={{
-                  fontSize: 13,
-                  fontFamily: "Inter_500Medium",
-                  color: "#F97316",
-                }}
-              >
+              <Text style={{ fontSize: 13, fontFamily: "Inter_500Medium", color: "#F97316" }}>
                 Change Photo
               </Text>
             </TouchableOpacity>
