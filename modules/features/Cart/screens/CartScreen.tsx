@@ -1,5 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import {
+  Alert,
   RefreshControl,
   ScrollView,
   Text,
@@ -28,6 +30,14 @@ export default function CartScreen() {
     // TODO: backend refresh logic
   });
 
+  const handleVoucherPress = () => {
+    Alert.alert(
+      "No Vouchers Available",
+      "You don't have any voucher",
+      [{ text: "OK", onPress: () => {} }]
+    );
+  };
+
   //  SAFE FALLBACK (prevents crash if summary is undefined)
   const safeSummary = {
     subtotal: summary?.subtotal ?? 0,
@@ -43,7 +53,7 @@ export default function CartScreen() {
       {/* Header */}
       <View className="flex-row items-center justify-between px-6 pt-4 pb-1">
         <Text className="text-3xl font-heading text-orange-500">
-          My Cart 🛒
+          My Cart 
         </Text>
 
         {cartItems.length > 0 && (
@@ -93,7 +103,9 @@ export default function CartScreen() {
           </View>
 
           {/* Voucher */}
-          <TouchableOpacity className="mx-6 mb-4 bg-card dark:bg-darkCard border border-border dark:border-darkBorder rounded-2xl p-4 flex-row items-center">
+          <TouchableOpacity 
+            onPress={handleVoucherPress}
+            className="mx-6 mb-4 bg-card dark:bg-darkCard border border-border dark:border-darkBorder rounded-2xl p-4 flex-row items-center">
             <Ionicons name="ticket-outline" size={20} color="#2563EB" />
             <Text className="flex-1 text-sm font-body text-textSecondary dark:text-darkTextSecondary mx-3">
               Apply voucher or discount code
@@ -109,8 +121,7 @@ export default function CartScreen() {
           <CartSummary
             summary={safeSummary}
             onCheckout={() => {
-              // TODO: navigate to checkout
-              console.log("Checkout pressed");
+              router.push("/checkout");
             }}
           />
         </ScrollView>

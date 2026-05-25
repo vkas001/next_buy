@@ -10,7 +10,7 @@ interface CartSummaryProps {
 }
 
 export default function CartSummary({ summary, onCheckout }: CartSummaryProps) {
-  // ✅ SAFE FALLBACKS (prevents crashes)
+  //  SAFE FALLBACKS (prevents crashes)
   const subtotal = summary?.subtotal ?? 0;
   const shipping = summary?.shipping ?? 0;
   const total = summary?.total ?? 0;

@@ -38,7 +38,7 @@ export default function CheckoutScreen() {
     if (success) {
       clearCart();
       Alert.alert(
-        "Order Placed! 🎉",
+        "Order Placed! ",
         "Your order has been placed successfully.",
         [{ text: "Track Order", onPress: () => router.push("/orders") }],
       );
