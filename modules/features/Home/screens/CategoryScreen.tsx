@@ -4,7 +4,6 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProductCard from "../components/ProductCard";
 
-// Dummy data - backend will replace with API call
 const allProducts = [
   {
     id: "1",
@@ -12,6 +11,7 @@ const allProducts = [
     price: "Rs. 45,000",
     condition: "Good",
     category: "Electronics",
+    image: require("@/assets/images/search/iphone13.webp"),
   },
   {
     id: "2",
@@ -19,6 +19,7 @@ const allProducts = [
     price: "Rs. 35,000",
     condition: "Like New",
     category: "Electronics",
+    image: require("@/assets/images/search/iphone13.webp"),
   },
   {
     id: "3",
@@ -26,6 +27,7 @@ const allProducts = [
     price: "Rs. 8,000",
     condition: "Good",
     category: "Electronics",
+    image: require("@/assets/images/search/sony.jpg"),
   },
   {
     id: "4",
@@ -33,6 +35,7 @@ const allProducts = [
     price: "Rs. 85,000",
     condition: "Like New",
     category: "Electronics",
+    image: require("@/assets/images/search/macbook.png"),
   },
   {
     id: "5",
@@ -40,6 +43,7 @@ const allProducts = [
     price: "Rs. 3,500",
     condition: "Like New",
     category: "Fashion",
+    image: require("@/assets/images/search/nikey.jpg"),
   },
   {
     id: "6",
@@ -47,6 +51,7 @@ const allProducts = [
     price: "Rs. 2,800",
     condition: "Good",
     category: "Fashion",
+    image: require("@/assets/images/search/jacket.jpg"),
   },
   {
     id: "7",
@@ -54,6 +59,7 @@ const allProducts = [
     price: "Rs. 12,000",
     condition: "Like New",
     category: "Furniture",
+    image: require("@/assets/images/search/chair.jpg"),
   },
   {
     id: "8",
@@ -61,6 +67,7 @@ const allProducts = [
     price: "Rs. 4,500",
     condition: "Good",
     category: "Furniture",
+    image: require("@/assets/images/search/table.jpg"),
   },
   {
     id: "9",
@@ -68,6 +75,7 @@ const allProducts = [
     price: "Rs. 25,000",
     condition: "Good",
     category: "Electronics",
+    image: require("@/assets/images/search/dslr.jpg"),
   },
   {
     id: "10",
@@ -75,6 +83,7 @@ const allProducts = [
     price: "Rs. 7,000",
     condition: "Like New",
     category: "Music",
+    image: require("@/assets/images/search/iphone13.webp"),
   },
   {
     id: "11",
@@ -82,6 +91,7 @@ const allProducts = [
     price: "Rs. 2,000",
     condition: "Good",
     category: "Sports",
+    image: require("@/assets/images/search/cricket.jpg"),
   },
   {
     id: "12",
@@ -89,6 +99,7 @@ const allProducts = [
     price: "Rs. 800",
     condition: "Like New",
     category: "Sports",
+    image: require("@/assets/images/search/mat.jpg"),
   },
 ];
 
@@ -208,9 +219,11 @@ export default function CategoryScreen() {
             {products.map((product) => (
               <ProductCard
                 key={product.id}
+                id={product.id}
                 name={product.name}
                 price={product.price}
                 condition={product.condition}
+                image={product.image}
                 onPress={() => router.push(`/product/${product.id}`)}
               />
             ))}

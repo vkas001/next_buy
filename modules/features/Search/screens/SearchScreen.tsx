@@ -3,6 +3,7 @@ import { router } from "expo-router";
 import { useState } from "react";
 import {
   FlatList,
+  Image,
   Text,
   TextInput,
   TouchableOpacity,
@@ -18,6 +19,7 @@ const allProducts = [
     price: "Rs. 45,000",
     condition: "Good",
     category: "Electronics",
+    image: require("@/assets/images/search/iphone13.webp"),
   },
   {
     id: "2",
@@ -25,6 +27,7 @@ const allProducts = [
     price: "Rs. 8,000",
     condition: "Good",
     category: "Electronics",
+    image: require("@/assets/images/search/sony.jpg"),
   },
   {
     id: "3",
@@ -32,6 +35,7 @@ const allProducts = [
     price: "Rs. 85,000",
     condition: "Like New",
     category: "Electronics",
+    image: require("@/assets/images/search/macbook.png"),
   },
   {
     id: "4",
@@ -39,6 +43,7 @@ const allProducts = [
     price: "Rs. 25,000",
     condition: "Good",
     category: "Electronics",
+    image: require("@/assets/images/search/dslr.jpg"),
   },
   {
     id: "5",
@@ -46,6 +51,7 @@ const allProducts = [
     price: "Rs. 5,500",
     condition: "Fair",
     category: "Electronics",
+    image: require("@/assets/images/search/watch.jpg"),
   },
 
   // Fashion
@@ -55,6 +61,7 @@ const allProducts = [
     price: "Rs. 3,500",
     condition: "Like New",
     category: "Fashion",
+    image: require("@/assets/images/search/nikey.jpg"),
   },
   {
     id: "7",
@@ -62,6 +69,7 @@ const allProducts = [
     price: "Rs. 2,800",
     condition: "Good",
     category: "Fashion",
+    image: require("@/assets/images/search/jacket.jpg"),
   },
   {
     id: "8",
@@ -69,6 +77,7 @@ const allProducts = [
     price: "Rs. 1,800",
     condition: "Good",
     category: "Fashion",
+    image: require("@/assets/images/search/jeans.jpg"),
   },
   {
     id: "9",
@@ -76,6 +85,7 @@ const allProducts = [
     price: "Rs. 1,200",
     condition: "Like New",
     category: "Fashion",
+    image: require("@/assets/images/search/hoodie.jpg"),
   },
 
   // Furniture
@@ -85,6 +95,7 @@ const allProducts = [
     price: "Rs. 12,000",
     condition: "Like New",
     category: "Furniture",
+    image: require("@/assets/images/search/chair.jpg"),
   },
   {
     id: "11",
@@ -92,6 +103,7 @@ const allProducts = [
     price: "Rs. 4,500",
     condition: "Good",
     category: "Furniture",
+    image: require("@/assets/images/search/table.jpg"),
   },
   {
     id: "12",
@@ -99,6 +111,7 @@ const allProducts = [
     price: "Rs. 3,200",
     condition: "Good",
     category: "Furniture",
+    image: require("@/assets/images/search/shelf.jpg"),
   },
   {
     id: "13",
@@ -106,6 +119,7 @@ const allProducts = [
     price: "Rs. 6,000",
     condition: "Like New",
     category: "Furniture",
+    image: require("@/assets/images/search/officechair.jpg"),
   },
 
   // Books
@@ -115,6 +129,7 @@ const allProducts = [
     price: "Rs. 1,500",
     condition: "Good",
     category: "Books",
+    image: require("@/assets/images/search/harryporter.jpg"),
   },
   {
     id: "15",
@@ -122,6 +137,7 @@ const allProducts = [
     price: "Rs. 300",
     condition: "Like New",
     category: "Books",
+    image: require("@/assets/images/search/richdadpoordad.jpg"),
   },
   {
     id: "16",
@@ -129,6 +145,7 @@ const allProducts = [
     price: "Rs. 400",
     condition: "Good",
     category: "Books",
+    image: require("@/assets/images/search/atomichabbit.jpg"),
   },
   {
     id: "17",
@@ -136,6 +153,7 @@ const allProducts = [
     price: "Rs. 250",
     condition: "Fair",
     category: "Books",
+    image: require("@/assets/images/search/thealchemist.jpg"),
   },
 
   // Sports
@@ -145,6 +163,7 @@ const allProducts = [
     price: "Rs. 2,000",
     condition: "Good",
     category: "Sports",
+    image: require("@/assets/images/search/cricket.jpg"),
   },
   {
     id: "19",
@@ -152,6 +171,7 @@ const allProducts = [
     price: "Rs. 800",
     condition: "Like New",
     category: "Sports",
+    image: require("@/assets/images/search/mat.jpg"),
   },
   {
     id: "20",
@@ -159,6 +179,7 @@ const allProducts = [
     price: "Rs. 600",
     condition: "Good",
     category: "Sports",
+    image: require("@/assets/images/search/football.jpg"),
   },
   {
     id: "21",
@@ -166,6 +187,7 @@ const allProducts = [
     price: "Rs. 1,200",
     condition: "Like New",
     category: "Sports",
+    image: require("@/assets/images/search/badminton.jpg"),
   },
 ];
 
@@ -436,9 +458,18 @@ export default function SearchScreen() {
                 marginRight: 12,
                 borderWidth: 1,
                 borderColor: "#FED7AA",
+                overflow: "hidden",
               }}
             >
-              <Ionicons name="image-outline" size={24} color="#FED7AA" />
+              {item.image ? (
+                <Image
+                  source={item.image}
+                  style={{ width: "100%", height: "100%" }}
+                  resizeMode="cover"
+                />
+              ) : (
+                <Ionicons name="image-outline" size={24} color="#FED7AA" />
+              )}
             </View>
 
             {/* Info */}

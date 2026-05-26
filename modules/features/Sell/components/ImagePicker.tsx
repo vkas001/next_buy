@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
 interface ImagePickerProps {
   images: string[];
@@ -39,7 +39,7 @@ export default function ImagePicker({
       {/* Image Grid */}
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 12 }}>
         {/* Existing Images */}
-        {images.map((_, index) => (
+        {images.map((imageUri, index) => (
           <View
             key={index}
             style={{
@@ -51,9 +51,13 @@ export default function ImagePicker({
               borderColor: "#FED7AA",
               alignItems: "center",
               justifyContent: "center",
+              overflow: "hidden",
             }}
           >
-            <Ionicons name="image" size={32} color="#F97316" />
+            <Image
+              source={{ uri: imageUri }}
+              style={{ width: "100%", height: "100%" }}
+            />
             <TouchableOpacity
               onPress={() => onRemoveImage(index)}
               style={{

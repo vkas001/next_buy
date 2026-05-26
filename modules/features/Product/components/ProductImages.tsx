@@ -1,11 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
-import { Dimensions, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native";
 
 const { width } = Dimensions.get("window");
 
 interface ProductImagesProps {
-  images: string[];
+  images: any[];
   onBack: () => void;
   onWishlist: () => void;
   isWishlisted: boolean;
@@ -21,10 +21,23 @@ export default function ProductImages({
 
   return (
     <View className="bg-card dark:bg-darkCard" style={{ height: 320 }}>
-      {/* Main Image Placeholder */}
-      <View className="flex-1 items-center justify-center bg-darkBorder">
-        <Ionicons name="image-outline" size={64} color="#64748B" />
-        <Text className="text-sm font-body text-textSecondary dark:text-darkTextSecondary mt-2">
+      {/* Main Image */}
+      <View className="flex-1 items-center justify-center bg-gray-100">
+        {images[activeIndex] ? (
+          <Image
+            source={images[activeIndex]}
+            style={{ width: "100%", height: "100%" }}
+            resizeMode="contain"
+          />
+        ) : (
+          <>
+            <Ionicons name="image-outline" size={64} color="#64748B" />
+            <Text className="text-sm font-body text-textSecondary dark:text-darkTextSecondary mt-2">
+              No image
+            </Text>
+          </>
+        )}
+        <Text className="text-sm font-body text-textSecondary dark:text-darkTextSecondary mt-2 absolute bottom-2">
           {activeIndex + 1} / {images.length}
         </Text>
       </View>
