@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import * as ImagePickerLib from "expo-image-picker";
 import { router } from "expo-router";
 import {
   ActivityIndicator,
@@ -23,9 +24,26 @@ export default function SellScreen() {
   const { form, errors, isSubmitting, updateField, submitListing } =
     useSellForm();
 
+  const handleAddImage = async () => {
+    try {
+      const result = await ImagePickerLib.launchImageLibraryAsync({
+        mediaTypes: ["images"],
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 0.8,
+      });
+
+      if (!result.canceled && result.assets[0]) {
+        updateField("images", [...form.images, result.assets[0].uri]);
+      }
+    } catch (error) {
+      Alert.alert("Error", "Failed to pick image");
+    }
+  };
+
   const handleSubmit = async () => {
     await submitListing();
-    Alert.alert("Success! 🎉", "Your listing has been posted!", [
+    Alert.alert("Success! ", "Your listing has been posted!", [
       { text: "OK", onPress: () => router.back() },
     ]);
   };
@@ -75,10 +93,7 @@ export default function SellScreen() {
           {/* Image Picker */}
           <ImagePicker
             images={form.images}
-            onAddImage={() => {
-              // TODO: backend will implement image upload
-              updateField("images", [...form.images, "placeholder"]);
-            }}
+            onAddImage={handleAddImage}
             onRemoveImage={(index) => {
               const updated = form.images.filter((_, i) => i !== index);
               updateField("images", updated);

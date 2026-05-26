@@ -19,7 +19,7 @@ export interface Product {
   condition: "Like New" | "Good" | "Fair" | "Poor";
   category: string;
   description: string;
-  images: string[];
+  images: any[];
   seller: Seller;
   location: string;
   postedDate: string;
